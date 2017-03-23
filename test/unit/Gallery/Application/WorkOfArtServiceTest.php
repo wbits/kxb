@@ -35,4 +35,3 @@ final class WorkOfArtServiceTest extends TestCase
         static::assertCount(1, $works);
     }
 }
-

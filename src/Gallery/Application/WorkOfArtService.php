@@ -27,4 +27,3 @@ final class WorkOfArtService
         $this->repository->save($work);
     }
 }
-

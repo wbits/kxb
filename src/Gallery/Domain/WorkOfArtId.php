@@ -18,4 +18,3 @@ final class WorkOfArtId
         return $this->id;
     }
 }
-

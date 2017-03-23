@@ -17,12 +17,12 @@ final class InMemoryWorkOfArtRepository implements WorkOfArtRepository
     {
         ++$this->sequence;
 
-        return new WorkOfArtId((string)$this->sequence);
+        return new WorkOfArtId((string) $this->sequence);
     }
 
     public function save(WorkOfArt $workOfArt)
     {
-        $key = (string)$workOfArt->getId();
+        $key = (string) $workOfArt->getId();
         $this->artCollection[$key] = $workOfArt;
     }
 
@@ -39,4 +39,3 @@ final class InMemoryWorkOfArtRepository implements WorkOfArtRepository
         return $this->artCollection;
     }
 }
-

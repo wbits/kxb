@@ -23,4 +23,3 @@ final class WorkOfArt
         return $this->id;
     }
 }
-
