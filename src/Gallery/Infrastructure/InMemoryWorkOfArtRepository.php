@@ -23,7 +23,7 @@ final class InMemoryWorkOfArtRepository implements WorkOfArtRepository
     public function save(WorkOfArt $workOfArt)
     {
         $key = (string)$workOfArt->getId();
-        $this->artCollection[$key] = unserialize(serialize($workOfArt));
+        $this->artCollection[$key] = $workOfArt;
     }
 
     public function get(WorkOfArtId $workOfArtId): WorkOfArt
