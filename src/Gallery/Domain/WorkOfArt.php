@@ -8,24 +8,37 @@ final class WorkOfArt
 {
     private $id;
     private $title;
+    private $details;
+    private $availability;
+    private $price;
     private $artist;
 
-    /**
-     * @var WorkOfArtDetails
-     */
-    private $details;
-
-    private function __construct(WorkOfArtId $id, Title $title, WorkOfArtDetails $details, Artist $artist)
-    {
+    private function __construct(
+        WorkOfArtId $id,
+        Title $title,
+        WorkOfArtDetails $details,
+        Availability $availability,
+        Price $price,
+        Artist $artist
+    ) {
         $this->id = $id;
         $this->title = $title;
         $this->details = $details;
         $this->artist = $artist;
+        $this->availability = $availability;
+        $this->price = $price;
     }
 
-    public static function create(WorkOfArtId $id, Title $title, WorkOfArtDetails $details, Artist $artist): WorkOfArt
+    public static function create(
+        WorkOfArtId $id,
+        Title $title,
+        WorkOfArtDetails $details,
+        Availability $availability,
+        Price $price,
+        Artist $artist
+    ): WorkOfArt
     {
-        return new self($id, $title, $details, $artist);
+        return new self($id, $title, $details, $availability, $price, $artist);
     }
 
     public function getId(): WorkOfArtId

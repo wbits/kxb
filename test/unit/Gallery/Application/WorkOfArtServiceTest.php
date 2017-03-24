@@ -8,10 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Wbits\Kxb\Gallery\Application\WorkOfArtService;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
+use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;
 use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Domain\Material;
+use Wbits\Kxb\Gallery\Domain\Price;
 use Wbits\Kxb\Gallery\Domain\Title;
 use Wbits\Kxb\Gallery\Domain\WorkOfArtDetails;
 use Wbits\Kxb\Gallery\Infrastructure\InMemoryWorkOfArtRepository;
@@ -43,13 +45,17 @@ final class WorkOfArtServiceTest extends TestCase
             new Dimensions('60 cm', '50 cm'),
             new CreatedInYear(new \DateTimeImmutable('2015'))
         );
+        $availability = new Availability(100);
+        $price = new Price(1200);
         $artist = new Artist(
             new ArtistId('1'),
             new FullName('Vincent', 'van Gogh')
         );
 
-        $this->workOfArtService->createWorkOfArt($title, $details, $artist);
+        $this->workOfArtService->createWorkOfArt($title, $details, $availability, $price, $artist);
         $works = $this->workOfArtService->getAllWorksOfArt();
+
+        var_dump(current($works));
 
         static::assertCount(1, $works);
     }
