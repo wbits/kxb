@@ -5,13 +5,13 @@ declare(strict_types = 1);
 namespace Wbits\Kxb\Gallery\Application;
 
 use Wbits\Kxb\Gallery\Domain\Artist;
-use Wbits\Kxb\Gallery\Domain\Availability;
-use Wbits\Kxb\Gallery\Domain\Price;
-use Wbits\Kxb\Gallery\Domain\Title;
 use Wbits\Kxb\Gallery\Domain\ArtPiece;
 use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
 use Wbits\Kxb\Gallery\Domain\ArtPieceId;
 use Wbits\Kxb\Gallery\Domain\ArtRepository;
+use Wbits\Kxb\Gallery\Domain\Availability;
+use Wbits\Kxb\Gallery\Domain\Price;
+use Wbits\Kxb\Gallery\Domain\Title;
 
 final class ArtService
 {

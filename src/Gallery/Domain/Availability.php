@@ -18,5 +18,3 @@ final class Availability
         return (string) $this->numberOfCopies;
     }
 }
-
-

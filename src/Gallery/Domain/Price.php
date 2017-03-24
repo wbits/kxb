@@ -19,4 +19,3 @@ final class Price
         return $this->price;
     }
 }
-

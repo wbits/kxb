@@ -36,8 +36,7 @@ final class ArtPiece
         Availability $availability,
         Price $price,
         Artist $artist
-    ): ArtPiece
-    {
+    ): ArtPiece {
         return new self($id, $title, $details, $availability, $price, $artist);
     }
 
@@ -46,7 +45,7 @@ final class ArtPiece
         return $this->id;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id' => (string) $this->id,
