@@ -4,7 +4,10 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Application;
 
+use Wbits\Kxb\Gallery\Domain\Artist;
+use Wbits\Kxb\Gallery\Domain\Title;
 use Wbits\Kxb\Gallery\Domain\WorkOfArt;
+use Wbits\Kxb\Gallery\Domain\WorkOfArtDetails;
 use Wbits\Kxb\Gallery\Domain\WorkOfArtRepository;
 
 final class WorkOfArtService
@@ -21,9 +24,10 @@ final class WorkOfArtService
         return $this->repository->getAll();
     }
 
-    public function createWorkOfArt()
+    public function createWorkOfArt(Title $title, WorkOfArtDetails $details, Artist $artist)
     {
-        $work = WorkOfArt::create($this->repository->getNextIdentifier());
+        $id = $this->repository->getNextIdentifier();
+        $work = WorkOfArt::create($id, $title, $details, $artist);
         $this->repository->save($work);
     }
 }
