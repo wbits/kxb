@@ -8,33 +8,39 @@ use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\Price;
 use Wbits\Kxb\Gallery\Domain\Title;
-use Wbits\Kxb\Gallery\Domain\WorkOfArt;
-use Wbits\Kxb\Gallery\Domain\WorkOfArtDetails;
-use Wbits\Kxb\Gallery\Domain\WorkOfArtRepository;
+use Wbits\Kxb\Gallery\Domain\ArtPiece;
+use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
+use Wbits\Kxb\Gallery\Domain\ArtPieceId;
+use Wbits\Kxb\Gallery\Domain\ArtRepository;
 
-final class WorkOfArtService
+final class ArtService
 {
     private $repository;
 
-    public function __construct(WorkOfArtRepository $repository)
+    public function __construct(ArtRepository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function getAllWorksOfArt(): array
+    public function getAllWorks(): array
     {
         return $this->repository->getAll();
     }
 
     public function createWorkOfArt(
         Title $title,
-        WorkOfArtDetails $details,
+        ArtPieceDetails $details,
         Availability $availability,
         Price $price,
         Artist $artist
     ) {
         $id = $this->repository->getNextIdentifier();
-        $work = WorkOfArt::create($id, $title, $details, $availability, $price, $artist);
+        $work = ArtPiece::create($id, $title, $details, $availability, $price, $artist);
         $this->repository->save($work);
+    }
+
+    public function getWork(ArtPieceId $id)
+    {
+        return $this->repository->get($id);
     }
 }

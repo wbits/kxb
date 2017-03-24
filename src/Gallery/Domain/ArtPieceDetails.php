@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Domain;
 
-final class WorkOfArtDetails
+final class ArtPieceDetails
 {
     private $material;
     private $size;
@@ -17,12 +17,18 @@ final class WorkOfArtDetails
         $this->year = $year;
     }
 
-    public function toArray()
+    public function getSize(): Dimensions
     {
-        return [
-            'material' => $this->material,
-            'size' => $this->size,
-            'year' => $this->year,
-        ];
+        return $this->size;
+    }
+
+    public function getMaterial(): Material
+    {
+        return $this->material;
+    }
+
+    public function getYear(): CreatedInYear
+    {
+        return $this->year;
     }
 }

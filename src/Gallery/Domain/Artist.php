@@ -19,4 +19,9 @@ final class Artist
     {
         return $this->id;
     }
+
+    public function getFullName(): FullName
+    {
+        return $this->name;
+    }
 }

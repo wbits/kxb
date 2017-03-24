@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Domain;
 
-final class WorkOfArt
+final class ArtPiece
 {
     private $id;
     private $title;
@@ -14,9 +14,9 @@ final class WorkOfArt
     private $artist;
 
     private function __construct(
-        WorkOfArtId $id,
+        ArtPieceId $id,
         Title $title,
-        WorkOfArtDetails $details,
+        ArtPieceDetails $details,
         Availability $availability,
         Price $price,
         Artist $artist
@@ -30,19 +30,34 @@ final class WorkOfArt
     }
 
     public static function create(
-        WorkOfArtId $id,
+        ArtPieceId $id,
         Title $title,
-        WorkOfArtDetails $details,
+        ArtPieceDetails $details,
         Availability $availability,
         Price $price,
         Artist $artist
-    ): WorkOfArt
+    ): ArtPiece
     {
         return new self($id, $title, $details, $availability, $price, $artist);
     }
 
-    public function getId(): WorkOfArtId
+    public function getId(): ArtPieceId
     {
         return $this->id;
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => (string) $this->id,
+            'title' => (string) $this->title,
+            'material' => (string) $this->details->getMaterial(),
+            'size' => (string) $this->details->getSize(),
+            'year' => (string) $this->details->getYear(),
+            'availability' => (string) $this->availability,
+            'price' => (string) $this->price,
+            'artist_id' => (string) $this->artist->getId(),
+            'artist_name' => (string) $this->artist->getFullName(),
+        ];
     }
 }
