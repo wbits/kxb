@@ -22,7 +22,7 @@ use Wbits\Kxb\Gallery\Infrastructure\InMemoryArtRepository;
 
 final class ArtServiceTest extends TestCase
 {
-    const NON_EXISTING_WORK_ID = '555';
+    const NON_EXISTING_ART_PIECE_ID = '555';
 
     /**
      * @var ArtService
@@ -34,34 +34,34 @@ final class ArtServiceTest extends TestCase
         $this->artService = new ArtService(new InMemoryArtRepository());
     }
 
-    public function testItDoesNotReturnAnyWorksOfArtWhenNoneWereCreated()
+    public function testItDoesNotReturnAnyArtPiecesWhenNoneWereCreated()
     {
-        $works = $this->artService->getAllWorks();
+        $works = $this->artService->getAllPieces();
         static::assertEmpty($works);
     }
 
-    public function testItReturnsACollectionOfWorksWhen()
+    public function testItReturnsACollectionOfArtPieces()
     {
-        $this->createWorkOfArt();
-        $works = $this->artService->getAllWorks();
+        $this->createArtPiece();
+        $works = $this->artService->getAllPieces();
         static::assertCount(1, $works);
     }
 
-    public function testItCanFetchAWorkOfArtById()
+    public function testItCanFetchAnArtPieceById()
     {
-        $this->createWorkOfArt();
+        $this->createArtPiece();
         $id = new ArtPieceId('1');
-        $work = $this->artService->getWork($id);
+        $work = $this->artService->getPiece($id);
         self::assertInstanceOf(ArtPiece::class, $work);
     }
 
-    public function testItThrowsAnInvalidArgumentExceptionWhenItCouldNotFind()
+    public function testItThrowsAnInvalidArgumentExceptionWhenItCouldNotFindAnArtPieceWithGivenId()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->artService->getWork(new ArtPieceId(self::NON_EXISTING_WORK_ID));
+        $this->artService->getPiece(new ArtPieceId(self::NON_EXISTING_ART_PIECE_ID));
     }
 
-    private function createWorkOfArt()
+    private function createArtPiece()
     {
         $title = new Title('title');
         $details = new ArtPieceDetails(
@@ -76,6 +76,6 @@ final class ArtServiceTest extends TestCase
             new FullName('Vincent', 'van Gogh')
         );
 
-        $this->artService->createWorkOfArt($title, $details, $availability, $price, $artist);
+        $this->artService->createArtPiece($title, $details, $availability, $price, $artist);
     }
 }
