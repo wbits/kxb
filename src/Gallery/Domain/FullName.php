@@ -13,10 +13,19 @@ final class FullName
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+
+        $this->validate();
     }
 
     public function __toString(): string
     {
-        return sprintf('%s %s', $this->firstName, $this->lastName);
+        return trim(sprintf('%s %s', $this->firstName, $this->lastName));
+    }
+
+    private function validate()
+    {
+        if (empty($this->lastName)) {
+            throw new \InvalidArgumentException('LastName can not be empty');
+        }
     }
 }
