@@ -11,13 +11,13 @@ final class FullNameTest extends TestCase
 {
     public function testItSeparatesFirstNameAndLastNameWithASpace()
     {
-        self::assertEquals('Foo Bar', (string)new FullName('Foo', 'Bar'));
+        self::assertEquals('Foo Bar', (string) new FullName('Foo', 'Bar'));
     }
 
     public function testItAcceptsALastNameOnlyAndTrims()
     {
-        self::assertEquals('Foo', (string)new FullName('', 'Foo'));
-        self::assertEquals('Foo', (string)new FullName(' ', 'Foo'));
+        self::assertEquals('Foo', (string) new FullName('', 'Foo'));
+        self::assertEquals('Foo', (string) new FullName(' ', 'Foo'));
     }
 
     public function testItValidatesLastNameOnBeingRequired()
@@ -26,4 +26,3 @@ final class FullNameTest extends TestCase
         new FullName('foo', '');
     }
 }
-
