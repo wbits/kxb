@@ -7,17 +7,12 @@ namespace Wbits\Kxb\Admin\Controller;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceRequest;
+use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceFormData;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Domain\Artist;
-use Wbits\Kxb\Gallery\Domain\ArtistId;
-use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
 use Wbits\Kxb\Gallery\Domain\ArtPieceId;
 use Wbits\Kxb\Gallery\Domain\Availability;
-use Wbits\Kxb\Gallery\Domain\CreatedInYear;
-use Wbits\Kxb\Gallery\Domain\Dimensions;
-use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Domain\Material;
 use Wbits\Kxb\Gallery\Domain\Price;
 use Wbits\Kxb\Gallery\Domain\Title;
@@ -52,7 +47,7 @@ final class ArtController
 
     public function createArtPieceFormAction()
     {
-        $data = new CreateArtPieceRequest();
+        $data = new CreateArtPieceFormData();
         $form = $this->formFactory->create(ArtType::class, $data);
 
         return $this->twig->render('createArtPieceForm.twig', ['form' => $form->createView()]);
@@ -63,22 +58,19 @@ final class ArtController
         $form = $this->formFactory->create(ArtType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $title = new Title($data->getTitle());
-            $details = new ArtPieceDetails(
-                new Material($data->getTitle()),
-                new Dimensions($data->getWidth(), $data->getHeight()),
-                new CreatedInYear(new \DateTimeImmutable($data->getYear()))
-            );
-            $availability = new Availability((int) $data->getNumberOfCopies());
-            $price = new Price((float) $data->getPrice());
-            $artist = new Artist(new ArtistId('1'), new FullName('', $data->getArtist()));
-            $id = (string) $this->artService->createArtPiece($title, $details, $availability, $price, $artist);
-
-            return new RedirectResponse(sprintf('/admin/art/%s', $id));
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return new RedirectResponse('admin/create_art_piece', ['form' => $form->createView()]);
         }
 
-        return new RedirectResponse('admin/create_art_piece');
+        $data = $form->getData();
+        $id = (string) $this->artService->createArtPiece(
+            $data->title(),
+            $data->details(),
+            $data->availability(),
+            $data->price(),
+            $data->artist()
+        );
+
+        return new RedirectResponse(sprintf('/admin/art/%s', $id));
     }
 }
