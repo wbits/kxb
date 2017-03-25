@@ -10,12 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceFormData;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
-use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtPieceId;
-use Wbits\Kxb\Gallery\Domain\Availability;
-use Wbits\Kxb\Gallery\Domain\Material;
-use Wbits\Kxb\Gallery\Domain\Price;
-use Wbits\Kxb\Gallery\Domain\Title;
 
 final class ArtController
 {
