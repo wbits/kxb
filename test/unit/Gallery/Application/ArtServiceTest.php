@@ -52,6 +52,7 @@ final class ArtServiceTest extends TestCase
         $this->createArtPiece();
         $id = new ArtPieceId('1');
         $work = $this->artService->getPiece($id);
+        var_dump($work);
         self::assertInstanceOf(ArtPiece::class, $work);
     }
 
