@@ -21,7 +21,7 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
     public function register(Container $pimple)
     {
         $app['artController'] = function (Container $pimple) {
-            return new ArtController($pimple['artService'], $pimple['form.factory']);
+            return new ArtController($pimple['artService'], $pimple['form.factory'], $pimple['twig']);
         };
 
         $app['artService'] = function () {
@@ -33,9 +33,9 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
     {
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
-        $controllers->get('art/{id}', 'artController:getArtAction');
+//        $controllers->get('art/{id}', 'artController:getArtAction');
 //        $controllers->get('art', 'artController:getArtCollectionAction');
-        $controllers->post('art', 'artController:createPieceOfArtAction');
+        $controllers->get('art', 'artController:createArtPieceAction');
 
         return $controllers;
     }

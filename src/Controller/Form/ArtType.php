@@ -6,6 +6,8 @@ namespace Controller\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wbits\Kxb\Controller\Dto\CreateArtPieceRequest;
 
 final class ArtType extends AbstractType
 {
@@ -19,7 +21,13 @@ final class ArtType extends AbstractType
             ->add('year')
             ->add('number_of_copies')
             ->add('price')
-            ->add('artist')
-        ;
+            ->add('artist');
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => CreateArtPieceRequest::class,
+        ));
     }
 }
