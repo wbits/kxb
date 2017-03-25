@@ -20,11 +20,11 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
 {
     public function register(Container $pimple)
     {
-        $app['artController'] = function (Container $pimple) {
+        $pimple['artController'] = function (Container $pimple) {
             return new ArtController($pimple['artService'], $pimple['form.factory'], $pimple['twig']);
         };
 
-        $app['artService'] = function () {
+        $pimple['artService'] = function () {
             return new ArtService(new InMemoryArtRepository()); // todo replace inMemoryRepository
         };
     }
@@ -33,9 +33,9 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
     {
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
-//        $controllers->get('art/{id}', 'artController:getArtAction');
-//        $controllers->get('art', 'artController:getArtCollectionAction');
-        $controllers->get('art', 'artController:createArtPieceAction');
+        $controllers->get('art/{id}', 'artController:showArtPieceAction');
+        $controllers->post('create_art_piece', 'artController:saveArtPieceAction');
+        $controllers->get('create_art_piece', 'artController:createArtPieceFormAction');
 
         return $controllers;
     }

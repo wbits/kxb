@@ -15,42 +15,42 @@ final class CreateArtPieceRequest
     private $price;
     private $artist;
 
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }
 
-    public function getMaterial(): string
+    public function getMaterial()
     {
         return $this->material;
     }
 
-    public function getWidth(): string
+    public function getWidth()
     {
         return $this->width;
     }
 
-    public function getHeight(): string
+    public function getHeight()
     {
         return $this->height;
     }
 
-    public function getYear(): string
+    public function getYear()
     {
         return $this->year;
     }
 
-    public function getNumberOfCopies(): string
+    public function getNumberOfCopies()
     {
         return $this->number_of_copies;
     }
 
-    public function getPrice(): string
+    public function getPrice()
     {
         return $this->price;
     }
 
-    public function getArtist(): string
+    public function getArtist()
     {
         return $this->artist;
     }

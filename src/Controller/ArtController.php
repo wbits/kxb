@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Controller;
 
-use Controller\Form\ArtType;
+use Wbits\Kxb\Controller\Form\ArtType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +13,7 @@ use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
+use Wbits\Kxb\Gallery\Domain\ArtPieceId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;
@@ -37,13 +38,34 @@ final class ArtController
         $this->twig = $twig;
     }
 
-    public function createArtPieceAction(Request $request)
+    public function showArtPieceAction($id)
+    {
+        $artPieceId = new ArtPieceId($id);
+//        $artPiece = $this->artService->getPiece($artPieceId);
+
+        return $this->twig->render('showArtPiece.twig', ['artPiece' => [
+            'title' => 'foo',
+            'material' => 'bar',
+            'price' => 'EU 1 999,90',
+        ]]);
+    }
+
+    public function createArtPieceFormAction()
+    {
+        $data = new CreateArtPieceRequest();
+        $form = $this->formFactory->create(ArtType::class, $data);
+
+        return $this->twig->render('createArtPieceForm.twig', ['form' => $form->createView()]);
+    }
+
+    public function saveArtPieceAction(Request $request)
     {
         $form = $this->formFactory->create(ArtType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var CreateArtPieceRequest $data */
+
+
             $data = $form->getData();
             $title = new Title($data->getTitle());
             $details = new ArtPieceDetails(
@@ -54,11 +76,11 @@ final class ArtController
             $availability = new Availability((int)$data->getNumberOfCopies());
             $price = new Price((float)$data->getPrice());
             $artist = new Artist(new ArtistId('1'), new FullName('', $data->getArtist()));
-            $id = $this->artService->createArtPiece($title, $details, $availability, $price, $artist);
+            $id = (string)$this->artService->createArtPiece($title, $details, $availability, $price, $artist);
 
             return new RedirectResponse(sprintf('/admin/art/%s', $id));
         }
 
-        return $this->twig->render('createPieceOfArt.twig', ['form' => $form->createView()]);
+        return new RedirectResponse('admin/create_art_piece');
     }
 }

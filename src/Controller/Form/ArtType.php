@@ -2,9 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Controller\Form;
+namespace Wbits\Kxb\Controller\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wbits\Kxb\Controller\Dto\CreateArtPieceRequest;
@@ -21,7 +22,8 @@ final class ArtType extends AbstractType
             ->add('year')
             ->add('number_of_copies')
             ->add('price')
-            ->add('artist');
+            ->add('artist')
+            ->add('save', SubmitType::class, ['label' => 'Save']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

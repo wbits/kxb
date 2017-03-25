@@ -33,10 +33,12 @@ final class ArtService
         Availability $availability,
         Price $price,
         Artist $artist
-    ) {
+    ): ArtPieceId {
         $id = $this->repository->getNextIdentifier();
         $piece = ArtPiece::create($id, $title, $details, $availability, $price, $artist);
         $this->repository->save($piece);
+
+        return $piece->getId();
     }
 
     public function getPiece(ArtPieceId $id)
