@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Wbits\Kxb\Controller\Provider;
+namespace Wbits\Kxb\Admin\Controller\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -12,7 +12,7 @@ use Silex\Api\EventListenerProviderInterface;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Wbits\Kxb\Controller\ArtController;
+use Wbits\Kxb\Admin\Controller\ArtController;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Infrastructure\InMemoryArtRepository;
 
@@ -50,4 +50,3 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
         // TODO: Implement subscribe() method.
     }
 }
-

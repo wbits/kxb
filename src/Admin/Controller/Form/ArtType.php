@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Wbits\Kxb\Controller\Form;
+namespace Wbits\Kxb\Admin\Controller\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wbits\Kxb\Controller\Dto\CreateArtPieceRequest;
+use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceRequest;
 
 final class ArtType extends AbstractType
 {

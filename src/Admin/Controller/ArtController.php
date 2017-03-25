@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace Wbits\Kxb\Controller;
+namespace Wbits\Kxb\Admin\Controller;
 
-use Wbits\Kxb\Controller\Form\ArtType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wbits\Kxb\Controller\Dto\CreateArtPieceRequest;
+use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceRequest;
+use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
@@ -64,8 +64,6 @@ final class ArtController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             $data = $form->getData();
             $title = new Title($data->getTitle());
             $details = new ArtPieceDetails(
@@ -73,10 +71,10 @@ final class ArtController
                 new Dimensions($data->getWidth(), $data->getHeight()),
                 new CreatedInYear(new \DateTimeImmutable($data->getYear()))
             );
-            $availability = new Availability((int)$data->getNumberOfCopies());
-            $price = new Price((float)$data->getPrice());
+            $availability = new Availability((int) $data->getNumberOfCopies());
+            $price = new Price((float) $data->getPrice());
             $artist = new Artist(new ArtistId('1'), new FullName('', $data->getArtist()));
-            $id = (string)$this->artService->createArtPiece($title, $details, $availability, $price, $artist);
+            $id = (string) $this->artService->createArtPiece($title, $details, $availability, $price, $artist);
 
             return new RedirectResponse(sprintf('/admin/art/%s', $id));
         }

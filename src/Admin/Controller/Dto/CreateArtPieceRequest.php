@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Wbits\Kxb\Controller\Dto;
+namespace Wbits\Kxb\Admin\Controller\Dto;
 
 final class CreateArtPieceRequest
 {

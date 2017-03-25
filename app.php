@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
-use Wbits\Kxb\Controller\Provider\ArtControllerProvider;
+use Wbits\Kxb\Admin\Controller\Provider\ArtControllerProvider;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
