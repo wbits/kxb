@@ -16,9 +16,6 @@ final class ArtController
 {
     private $artService;
     private $formFactory;
-    /**
-     * @var \Twig_Environment
-     */
     private $twig;
 
     public function __construct(ArtService $artService, FormFactory $formFactory, \Twig_Environment $twig)
