@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Application;
 
-use Wbits\Kxb\Gallery\Domain\Artist;
+use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtPiece;
 use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
 use Wbits\Kxb\Gallery\Domain\ArtPieceId;
@@ -32,10 +32,10 @@ final class ArtService
         ArtPieceDetails $details,
         Availability $availability,
         Price $price,
-        Artist $artist
+        ArtistId $artistId
     ): ArtPieceId {
         $id = $this->repository->getNextIdentifier();
-        $piece = ArtPiece::create($id, $title, $details, $availability, $price, $artist);
+        $piece = ArtPiece::create($id, $title, $details, $availability, $price, $artistId);
         $this->repository->save($piece);
 
         return $piece->getId();

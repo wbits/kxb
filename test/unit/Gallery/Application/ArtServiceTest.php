@@ -71,11 +71,8 @@ final class ArtServiceTest extends TestCase
         );
         $availability = new Availability(100);
         $price = new Price(1200.50);
-        $artist = new Artist(
-            new ArtistId('1'),
-            new FullName('Vincent', 'van Gogh')
-        );
+        $artistId = new ArtistId('1');
 
-        $this->artService->createArtPiece($title, $details, $availability, $price, $artist);
+        $this->artService->createArtPiece($title, $details, $availability, $price, $artistId);
     }
 }

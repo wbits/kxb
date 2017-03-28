@@ -11,7 +11,7 @@ final class ArtPiece
     private $details;
     private $availability;
     private $price;
-    private $artist;
+    private $artistId;
 
     private function __construct(
         ArtPieceId $id,
@@ -19,12 +19,12 @@ final class ArtPiece
         ArtPieceDetails $details,
         Availability $availability,
         Price $price,
-        Artist $artist
+        ArtistId $artistId
     ) {
         $this->id = $id;
         $this->title = $title;
         $this->details = $details;
-        $this->artist = $artist;
+        $this->artistId = $artistId;
         $this->availability = $availability;
         $this->price = $price;
     }
@@ -35,9 +35,9 @@ final class ArtPiece
         ArtPieceDetails $details,
         Availability $availability,
         Price $price,
-        Artist $artist
+        ArtistId $artistId
     ): ArtPiece {
-        return new self($id, $title, $details, $availability, $price, $artist);
+        return new self($id, $title, $details, $availability, $price, $artistId);
     }
 
     public function getId(): ArtPieceId
@@ -55,8 +55,8 @@ final class ArtPiece
             'year' => (string) $this->details->getYear(),
             'availability' => (string) $this->availability,
             'price' => (string) $this->price,
-            'artist_id' => (string) $this->artist->getId(),
-            'artist_name' => (string) $this->artist->getFullName(),
+            'artist_id' => (string) $this->artistId->getId(),
+            'artist_name' => (string) $this->artistId->getFullName(),
         ];
     }
 }
