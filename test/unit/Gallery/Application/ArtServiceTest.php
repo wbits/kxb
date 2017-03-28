@@ -6,7 +6,6 @@ namespace unit\Wbits\Kxb\Gallery\Application;
 
 use PHPUnit\Framework\TestCase;
 use Wbits\Kxb\Gallery\Application\ArtService;
-use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtPiece;
 use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
@@ -14,7 +13,6 @@ use Wbits\Kxb\Gallery\Domain\ArtPieceId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;
-use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Domain\Material;
 use Wbits\Kxb\Gallery\Domain\Price;
 use Wbits\Kxb\Gallery\Domain\Title;
