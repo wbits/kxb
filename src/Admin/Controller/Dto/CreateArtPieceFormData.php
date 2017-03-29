@@ -4,13 +4,11 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Admin\Controller\Dto;
 
-use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;
-use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Domain\Material;
 use Wbits\Kxb\Gallery\Domain\Price;
 use Wbits\Kxb\Gallery\Domain\Title;
@@ -24,7 +22,7 @@ final class CreateArtPieceFormData
     private $year;
     private $number_of_copies;
     private $price;
-    private $artist;
+    private $artist_id;
 
     public function getTitle()
     {
@@ -61,9 +59,9 @@ final class CreateArtPieceFormData
         return $this->price;
     }
 
-    public function getArtist()
+    public function getArtistId()
     {
-        return $this->artist;
+        return $this->artist_id;
     }
 
     public function title(): Title
@@ -90,9 +88,9 @@ final class CreateArtPieceFormData
         return new Price((float) $this->price);
     }
 
-    public function artist(): Artist
+    public function artistId(): ArtistId
     {
-        return new Artist(new ArtistId('1'), new FullName('', $this->artist));
+        return new ArtistId('1');
     }
 
     public function setTitle($title): CreateArtPieceFormData
@@ -144,9 +142,9 @@ final class CreateArtPieceFormData
         return $this;
     }
 
-    public function setArtist($artist): CreateArtPieceFormData
+    public function setArtistId($artist_id): CreateArtPieceFormData
     {
-        $this->artist = $artist;
+        $this->artist_id = $artist_id;
 
         return $this;
     }

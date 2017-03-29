@@ -16,7 +16,22 @@ $app['debug'] = true;
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new FormServiceProvider());
 $app->register(new TranslationServiceProvider(), ['locale' => 'nl']);
-$app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/app/views']);
+$app->register(new TwigServiceProvider(), [
+    'twig.path' => __DIR__ . '/app/Resources/views',
+    'twig.form.templates' => [
+        'bootstrap_3_layout.html.twig',
+        'bootstrap_3_horizontal_layout.html.twig',
+    ],
+]);
+$app->register(new Silex\Provider\AssetServiceProvider(), [
+    'assets.version' => 'v1',
+    'assets.named_packages' => [
+        'css' => [
+            'version' => 'css3',
+            'base_path' => __DIR__ . '/app/Resources/css',
+        ],
+    ]
+]);
 $app->register(new ArtControllerProvider());
 
 return $app;

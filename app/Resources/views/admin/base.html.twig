@@ -1,0 +1,29 @@
+{# app/Resources/views/admin/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}KochXBos Gallery Admin Panel{% endblock %}</title>
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+</head>
+<body>
+<div id="sidebar">
+    {% block sidebar %}
+        <ul>
+            <li><a href="/admin/art">Art</a></li>
+            <li><a href="/admin/create_art_piece">Create Art Piece</a></li>
+            <li><a href="/admin/artists">Artists</a></li>
+        </ul>
+    {% endblock %}
+</div>
+
+<div id="content">
+    {% block body %}{% endblock %}
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+</body>
+</html>

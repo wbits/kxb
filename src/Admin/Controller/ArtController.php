@@ -42,7 +42,7 @@ final class ArtController
         $data = new CreateArtPieceFormData();
         $form = $this->formFactory->create(ArtType::class, $data);
 
-        return $this->twig->render('createArtPieceForm.twig', ['form' => $form->createView()]);
+        return $this->twig->render('admin/art/create.html.twig', ['form' => $form->createView()]);
     }
 
     public function saveArtPieceAction(Request $request)
@@ -60,7 +60,7 @@ final class ArtController
             $data->details(),
             $data->availability(),
             $data->price(),
-            $data->artist()
+            $data->artistId()
         );
 
         return new RedirectResponse(sprintf('/admin/art/%s', $id));

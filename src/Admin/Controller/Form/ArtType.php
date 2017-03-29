@@ -22,7 +22,7 @@ final class ArtType extends AbstractType
             ->add('year')
             ->add('number_of_copies')
             ->add('price')
-            ->add('artist')
+            ->add('artist_id')
             ->add('save', SubmitType::class, ['label' => 'Save']);
     }
 
