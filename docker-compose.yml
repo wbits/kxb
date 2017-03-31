@@ -5,7 +5,7 @@ services:
     image: richarvey/nginx-php-fpm:latest
     restart: always
     environment:
-      SSH_KEY: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwaauCz1WdMzSLp8p1qwrmKYbbu/3kj+aEuR4wSrQieMk+cWKKaSYwHr0fwA4LMxEKa/tkqvxZMsmY6Wy/JRmMjjNspxGrhin46U8ii5e+kUYRwxAQmkos76NL2fvspABCbgpLPQ7LsBAWrHvE2TyNyVF1YR/KXa68zgqQk73CXvGa0nSc2aQ1pDwjsd9rvxmeG8JVx58qGDHc8ay0rNtTqk/9sNRQ9SE1yppvNsgTsgF0VGjhioBOYEWsyCkXNVfcQ9HbosHJqtChjGRkZxHEM6tj7bNn7ra/G1+pLftYhhj1M6oz+WLws67aF8hMEycY/c8XaR/Ctnu3VOZb42rX dick@insided.nl'
+      SSH_KEY: ''
       GIT_REPO: 'git@github.com:wbits/kxb.git'
-      GIT_EMAIL: 'info@wbits.net'
+      GIT_EMAIL: ''
       GIT_NAME: 'wbits'
