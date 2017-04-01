@@ -8,4 +8,4 @@ php:
 before_script:
   - composer install -vvv
 
-script: containers/app/vendor/bin/phpunit containers/app/tests/
+script: vendor/bin/phpunit containers/app/test/
