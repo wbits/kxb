@@ -1,11 +1,25 @@
 version: '2'
 
 services:
-  nginx-php-fpm:
-    image: richarvey/nginx-php-fpm:latest
-    restart: always
-    environment:
-      SSH_KEY: ''
-      GIT_REPO: 'git@github.com:wbits/kxb.git'
-      GIT_EMAIL: ''
-      GIT_NAME: 'wbits'
+  pgsql:
+    image: postgres:alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  phpfpm:
+    image: php:7-fpm
+    expose:
+      - "9000"
+    volumes:
+      - /var/www/app
+    links:
+      - pgsql
+  nginx:
+    build: ./nginx
+    ports:
+      - "80"
+    links:
+      - phpfpm
+    volumes:
+      - ./docker/nginx/silex.conf:/etc/nginx/conf.d/default.conf
+    volumes_from:
+      - phpfpm

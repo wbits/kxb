@@ -4,4 +4,8 @@ php:
   - '7.1'
   - hhvm
   - nightly
-script: vendor/bin/phpunit --configuration phpunit.xml.dist
+
+before_script:
+  - php composer -vvv install
+
+script: containers/app/vendor/bin/phpunit containers/app/tests/
