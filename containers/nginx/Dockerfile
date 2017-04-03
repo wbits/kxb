@@ -1,6 +1,6 @@
 FROM nginx:latest
 
-ENV VHOST "kochxbos.loc"
+ENV VHOST "kochxbos.dev"
 
 # copy site conf file
 COPY silex.conf /etc/nginx/conf.d/

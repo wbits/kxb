@@ -1,25 +1,23 @@
 version: '2'
 
 services:
-  pgsql:
-    image: postgres:alpine
+  nginx:
+    build: containers/nginx
+    ports:
+      - "80:80"
+    links:
+      - php
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-  phpfpm:
+      - ./containers/nginx/silex.conf:/etc/nginx/conf.d/silex.conf
+    volumes_from:
+      - app
+  php:
     image: php:7-fpm
     expose:
       - "9000"
-    volumes:
-      - /var/www/app
-    links:
-      - pgsql
-  nginx:
-    build: ./nginx
-    ports:
-      - "80"
-    links:
-      - phpfpm
-    volumes:
-      - ./docker/nginx/silex.conf:/etc/nginx/conf.d/default.conf
     volumes_from:
-      - phpfpm
+      - app
+  app:
+    image: debian:jessie
+    volumes:
+      - ./containers/app:/var/www

@@ -1,13 +1,12 @@
 FROM debian:jessie
 
-LABEL name="Silex PHP-fpm container"
-LABEL version="0.1"
-
 # install mandatory php packages
-RUN apt-get update && apt-get upgrade -y && apt-get install -y git curl
-RUN cd /tmp && git clone https://github.com/kasparsd/php-7-debian.git
-RUN cd cd php-7-debian/
-RUN ./build.sh
+RUN apt-get update && apt-get upgrade -y && apt-get install -y git curl wget
+RUN echo "deb http://packages.dotdeb.org jessie all" | tee -a /etc/apt/sources.list.d/dotdeb.list
+RUN echo "deb-src http://packages.dotdeb.org jessie all" | tee -a /etc/apt/sources.list.d/dotdeb.list
+RUN wget -qO - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+RUN apt-get update
+RUN apt-get install php7.0-cli php7.0-curl php7.0-dev php7.0-zip php7.0-fpm php7.0-gd php7.0-xml php7.0-mysql php7.0-mcrypt php7.0-mbstring php7.0-opcache -y
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
@@ -29,6 +28,6 @@ RUN chmod +x /entrypoint.sh
 # set entry point
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-# start container
-CMD ["php7.0-fpm", "-F"]
+#### start container
+CMD ["php-fpm"]
 EXPOSE 9000
