@@ -2,22 +2,31 @@ version: '2'
 
 services:
   nginx:
-    build: containers/nginx
+    image: nginx
     ports:
-      - "80:80"
+      - 8080:80
+    volumes:
+      - ./:/var/www/silex
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     links:
-      - php
+      - fpm
+
+  fpm:
+    build: docker/php-fpm/
     volumes:
-      - ./containers/nginx/silex.conf:/etc/nginx/conf.d/silex.conf
-    volumes_from:
-      - app
-  php:
-    image: php:7-fpm
-    expose:
-      - "9000"
-    volumes_from:
-      - app
-  app:
-    image: debian:jessie
-    volumes:
-      - ./containers/app:/var/www
+      - ./:/var/www/silex
+      - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+    links:
+      - db
+
+  db:
+    restart: always
+    image: sameersbn/postgresql:9.6-2
+    ports:
+      - 5432:5432
+    environment:
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_NAME=kxb
+#    volumes:
+#      - ./docker/postgresql:/var/lib/postgresql

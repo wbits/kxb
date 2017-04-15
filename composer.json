@@ -2,14 +2,14 @@
   "autoload": {
     "psr-4": {
       "Wbits\\Kxb\\": [
-        "containers/app/src/"
+        "src/"
       ]
     }
   },
   "autoload-dev": {
     "psr-4": {
       "unit\\Wbits\\Kxb\\": [
-        "containers/app/test/unit/"
+        "test/unit/"
       ]
     }
   },
