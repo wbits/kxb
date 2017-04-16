@@ -15,7 +15,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wbits\Kxb\Admin\Controller\ArtController;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtRepository;
-use Wbits\Kxb\Gallery\Infrastructure\InMemoryArtRepository;
 
 final class ArtControllerProvider implements ControllerProviderInterface, ServiceProviderInterface, EventListenerProviderInterface, BootableProviderInterface
 {

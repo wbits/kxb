@@ -11,6 +11,6 @@ final class PriceTestDisabled extends TestCase
 {
     public function testItWillConvertAFloatToMoneyFormattedStringUsingDutchLocale()
     {
-//        self::assertEquals('EUR 5 600,75', (string) new Price(5600.75));
+        //        self::assertEquals('EUR 5 600,75', (string) new Price(5600.75));
     }
 }

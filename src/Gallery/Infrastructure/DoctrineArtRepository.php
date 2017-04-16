@@ -31,7 +31,7 @@ final class DoctrineArtRepository implements ArtRepository
     {
         $uuid = Uuid::uuid4();
 
-        return new ArtPieceId((string)$uuid);
+        return new ArtPieceId((string) $uuid);
     }
 
     public function save(ArtPiece $workOfArt)
@@ -41,7 +41,7 @@ final class DoctrineArtRepository implements ArtRepository
         try {
             $this->conn->insert('art_piece',
                 [
-                    'id' => (string)$workOfArt->getId(),
+                    'id' => (string) $workOfArt->getId(),
                     'doc' => json_encode($workOfArt->toArray()),
                 ]
             );
@@ -50,7 +50,6 @@ final class DoctrineArtRepository implements ArtRepository
             $this->conn->rollBack();
             throw $exception;
         }
-
     }
 
     public function get(ArtPieceId $workOfArtId)
@@ -84,7 +83,7 @@ final class DoctrineArtRepository implements ArtRepository
                 new CreatedInYear(new \DateTimeImmutable($artPiece['year']))
             ),
             new Availability(1),
-            new Price((float)$artPiece['price']),
+            new Price((float) $artPiece['price']),
             new ArtistId('some-artist-id')
         );
     }

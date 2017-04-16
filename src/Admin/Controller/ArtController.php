@@ -33,7 +33,6 @@ final class ArtController
 
         return new JsonResponse();
 
-
 //        $artPieceId = new ArtPieceId($id);
 ////        $artPiece = $this->artService->getPiece($artPieceId);
 //

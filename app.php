@@ -41,7 +41,7 @@ $app->register(new Silex\Provider\AssetServiceProvider(), [
             'version' => 'css3',
             'base_path' => __DIR__ . '/app/Resources/css',
         ],
-    ]
+    ],
 ]);
 $app->register(new ArtControllerProvider());
 
