@@ -5,12 +5,12 @@ declare(strict_types = 1);
 namespace Wbits\Kxb\Admin\Controller;
 
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceFormData;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
-use Wbits\Kxb\Gallery\Domain\ArtPieceId;
 
 final class ArtController
 {
@@ -27,14 +27,21 @@ final class ArtController
 
     public function showArtPieceAction($id)
     {
-        $artPieceId = new ArtPieceId($id);
-//        $artPiece = $this->artService->getPiece($artPieceId);
+        $list = $this->artService->getAllPieces();
 
-        return $this->twig->render('showArtPiece.twig', ['artPiece' => [
-            'title' => 'foo',
-            'material' => 'bar',
-            'price' => 'EU 1 999,90',
-        ]]);
+        var_dump($list[0]);
+
+        return new JsonResponse();
+
+
+//        $artPieceId = new ArtPieceId($id);
+////        $artPiece = $this->artService->getPiece($artPieceId);
+//
+//        return $this->twig->render('showArtPiece.twig', ['artPiece' => [
+//            'title' => 'foo',
+//            'material' => 'bar',
+//            'price' => 'EU 1 999,90',
+//        ]]);
     }
 
     public function createArtPieceFormAction()

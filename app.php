@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
@@ -14,6 +15,16 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 $app->register(new ServiceControllerServiceProvider());
+$app->register(new DoctrineServiceProvider(), array(
+    'db.options' => [
+        'driver' => 'pdo_pgsql',
+        'user' => 'kxbusr',
+        'password' => 'kxbpss',
+        'dbname' => 'kxb',
+        'host' => '192.168.99.100',
+        'port' => '5432',
+    ],
+));
 $app->register(new FormServiceProvider());
 $app->register(new TranslationServiceProvider(), ['locale' => 'nl']);
 $app->register(new TwigServiceProvider(), [

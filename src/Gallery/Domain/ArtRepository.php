@@ -10,7 +10,7 @@ interface ArtRepository
 
     public function save(ArtPiece $workOfArt);
 
-    public function get(ArtPieceId $workOfArtId): ArtPiece;
+    public function get(ArtPieceId $workOfArtId);
 
     /**
      * @return ArtPiece[]

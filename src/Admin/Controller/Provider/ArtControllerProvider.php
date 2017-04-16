@@ -14,6 +14,7 @@ use Silex\ControllerCollection;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wbits\Kxb\Admin\Controller\ArtController;
 use Wbits\Kxb\Gallery\Application\ArtService;
+use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtRepository;
 use Wbits\Kxb\Gallery\Infrastructure\InMemoryArtRepository;
 
 final class ArtControllerProvider implements ControllerProviderInterface, ServiceProviderInterface, EventListenerProviderInterface, BootableProviderInterface
@@ -24,8 +25,8 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
             return new ArtController($pimple['artService'], $pimple['form.factory'], $pimple['twig']);
         };
 
-        $pimple['artService'] = function () {
-            return new ArtService(new InMemoryArtRepository()); // todo replace inMemoryRepository
+        $pimple['artService'] = function (Container $pimple) {
+            return new ArtService(new DoctrineArtRepository($pimple['db']));
         };
     }
 

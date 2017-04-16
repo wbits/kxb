@@ -55,8 +55,7 @@ final class ArtPiece
             'year' => (string) $this->details->getYear(),
             'availability' => (string) $this->availability,
             'price' => (string) $this->price,
-            'artist_id' => (string) $this->artistId->getId(),
-            'artist_name' => (string) $this->artistId->getFullName(),
+            'artist_id' => (string) $this->artistId,
         ];
     }
 }
