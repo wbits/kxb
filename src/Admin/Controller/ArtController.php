@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceFormData;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
+use Wbits\Kxb\Gallery\Domain\ArtPieceId;
 
 final class ArtController
 {
@@ -27,20 +28,9 @@ final class ArtController
 
     public function showArtPieceAction($id)
     {
-        $list = $this->artService->getAllPieces();
+        $artPiece = $this->artService->getPiece(new ArtPieceId($id));
 
-        var_dump($list[0]);
-
-        return new JsonResponse();
-
-//        $artPieceId = new ArtPieceId($id);
-////        $artPiece = $this->artService->getPiece($artPieceId);
-//
-//        return $this->twig->render('showArtPiece.twig', ['artPiece' => [
-//            'title' => 'foo',
-//            'material' => 'bar',
-//            'price' => 'EU 1 999,90',
-//        ]]);
+        return new JsonResponse($artPiece->toArray());
     }
 
     public function createArtPieceFormAction()

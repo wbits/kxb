@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Admin\Controller\Provider;
 
+
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Api\BootableProviderInterface;
@@ -14,6 +15,8 @@ use Silex\ControllerCollection;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wbits\Kxb\Admin\Controller\ArtController;
 use Wbits\Kxb\Gallery\Application\ArtService;
+use Wbits\Kxb\Gallery\Infrastructure\ArtSerializer;
+use Wbits\Kxb\Gallery\Infrastructure\DbalRepository;
 use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtRepository;
 
 final class ArtControllerProvider implements ControllerProviderInterface, ServiceProviderInterface, EventListenerProviderInterface, BootableProviderInterface
@@ -25,7 +28,9 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
         };
 
         $pimple['artService'] = function (Container $pimple) {
-            return new ArtService(new DoctrineArtRepository($pimple['db']));
+            return new ArtService(
+                new DoctrineArtRepository(new DbalRepository($pimple['db'], 'art_piece'), new ArtSerializer())
+            );
         };
     }
 

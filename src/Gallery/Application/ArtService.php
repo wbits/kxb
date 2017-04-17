@@ -41,7 +41,7 @@ final class ArtService
         return $piece->getId();
     }
 
-    public function getPiece(ArtPieceId $id)
+    public function getPiece(ArtPieceId $id): ArtPiece
     {
         return $this->repository->get($id);
     }

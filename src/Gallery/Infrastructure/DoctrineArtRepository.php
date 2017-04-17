@@ -4,27 +4,20 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
-use Doctrine\DBAL\Connection;
 use Ramsey\Uuid\Uuid;
-use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtPiece;
-use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
 use Wbits\Kxb\Gallery\Domain\ArtPieceId;
 use Wbits\Kxb\Gallery\Domain\ArtRepository;
-use Wbits\Kxb\Gallery\Domain\Availability;
-use Wbits\Kxb\Gallery\Domain\CreatedInYear;
-use Wbits\Kxb\Gallery\Domain\Dimensions;
-use Wbits\Kxb\Gallery\Domain\Material;
-use Wbits\Kxb\Gallery\Domain\Price;
-use Wbits\Kxb\Gallery\Domain\Title;
 
 final class DoctrineArtRepository implements ArtRepository
 {
-    private $conn;
+    private $dbalRepository;
+    private $serializer;
 
-    public function __construct(Connection $conn)
+    public function __construct(DbalRepository $dbalRepository, ArtSerializer $serializer)
     {
-        $this->conn = $conn;
+        $this->dbalRepository = $dbalRepository;
+        $this->serializer = $serializer;
     }
 
     public function getNextIdentifier(): ArtPieceId
@@ -34,27 +27,17 @@ final class DoctrineArtRepository implements ArtRepository
         return new ArtPieceId((string) $uuid);
     }
 
-    public function save(ArtPiece $workOfArt)
+    public function save(ArtPiece $workOfArt): void
     {
-        $this->conn->beginTransaction();
-
-        try {
-            $this->conn->insert('art_piece',
-                [
-                    'id' => (string) $workOfArt->getId(),
-                    'doc' => json_encode($workOfArt->toArray()),
-                ]
-            );
-            $this->conn->commit();
-        } catch (\Exception $exception) {
-            $this->conn->rollBack();
-            throw $exception;
-        }
+        $data = $this->serializer->serialize($workOfArt);
+        $this->dbalRepository->upsert((string) $workOfArt->getId(), $data);
     }
 
     public function get(ArtPieceId $workOfArtId)
     {
-        // TODO: Implement get() method.
+        $result = $this->dbalRepository->fetchById((string) $workOfArtId);
+
+        return $this->serializer->deserialize($result['doc']);
     }
 
     /**
@@ -62,6 +45,7 @@ final class DoctrineArtRepository implements ArtRepository
      */
     public function getAll(): array
     {
+        return [];
         $result = [];
         $pieces = $this->conn->fetchAll('SELECT * FROM art_piece');
 
@@ -70,21 +54,5 @@ final class DoctrineArtRepository implements ArtRepository
         }
 
         return $result;
-    }
-
-    public function fromArray(ArtPieceId $id, array $artPiece)
-    {
-        return ArtPiece::create(
-            $id,
-            new Title($artPiece['title']),
-            new ArtPieceDetails(
-                new Material($artPiece['material']),
-                new Dimensions('500', '500'),
-                new CreatedInYear(new \DateTimeImmutable($artPiece['year']))
-            ),
-            new Availability(1),
-            new Price((float) $artPiece['price']),
-            new ArtistId('some-artist-id')
-        );
     }
 }

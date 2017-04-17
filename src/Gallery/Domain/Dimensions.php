@@ -19,4 +19,12 @@ final class Dimensions
     {
         return sprintf('%s x %s', $this->width, $this->height);
     }
+
+    public static function extract(string $size)
+    {
+        $width = strstr($size, ' x ', true);
+        $height = trim(substr(trim(strstr($size, ' x ')), 1));
+
+        return new self($width, $height);
+    }
 }
