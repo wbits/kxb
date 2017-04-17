@@ -8,9 +8,9 @@ interface ArtRepository
 {
     public function getNextIdentifier(): ArtPieceId;
 
-    public function save(ArtPiece $workOfArt);
+    public function save(ArtPiece $artPiece);
 
-    public function get(ArtPieceId $workOfArtId);
+    public function get(ArtPieceId $artPieceId);
 
     /**
      * @return ArtPiece[]

@@ -27,15 +27,15 @@ final class DoctrineArtRepository implements ArtRepository
         return new ArtPieceId((string) $uuid);
     }
 
-    public function save(ArtPiece $workOfArt): void
+    public function save(ArtPiece $artPiece): void
     {
-        $data = $this->serializer->serialize($workOfArt);
-        $this->dbal->upsert((string) $workOfArt->getId(), $data);
+        $data = $this->serializer->serialize($artPiece);
+        $this->dbal->upsert((string) $artPiece->getId(), $data);
     }
 
-    public function get(ArtPieceId $workOfArtId)
+    public function get(ArtPieceId $artPieceId)
     {
-        $result = $this->dbal->fetchById((string) $workOfArtId);
+        $result = $this->dbal->fetchById((string) $artPieceId);
 
         return $this->serializer->deserialize($result['doc']);
     }
