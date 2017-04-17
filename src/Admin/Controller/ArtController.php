@@ -33,6 +33,13 @@ final class ArtController
         return new JsonResponse($artPiece->toArray());
     }
 
+    public function ArtListAction()
+    {
+        $list = $this->artService->getAllPieces();
+
+        return new JsonResponse($list);
+    }
+
     public function createArtPieceFormAction()
     {
         $data = new CreateArtPieceFormData();

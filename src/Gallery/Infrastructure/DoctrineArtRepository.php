@@ -11,12 +11,12 @@ use Wbits\Kxb\Gallery\Domain\ArtRepository;
 
 final class DoctrineArtRepository implements ArtRepository
 {
-    private $dbalRepository;
+    private $dbal;
     private $serializer;
 
     public function __construct(DbalRepository $dbalRepository, ArtSerializer $serializer)
     {
-        $this->dbalRepository = $dbalRepository;
+        $this->dbal = $dbalRepository;
         $this->serializer = $serializer;
     }
 
@@ -30,12 +30,12 @@ final class DoctrineArtRepository implements ArtRepository
     public function save(ArtPiece $workOfArt): void
     {
         $data = $this->serializer->serialize($workOfArt);
-        $this->dbalRepository->upsert((string) $workOfArt->getId(), $data);
+        $this->dbal->upsert((string) $workOfArt->getId(), $data);
     }
 
     public function get(ArtPieceId $workOfArtId)
     {
-        $result = $this->dbalRepository->fetchById((string) $workOfArtId);
+        $result = $this->dbal->fetchById((string) $workOfArtId);
 
         return $this->serializer->deserialize($result['doc']);
     }
@@ -45,14 +45,8 @@ final class DoctrineArtRepository implements ArtRepository
      */
     public function getAll(): array
     {
-        return [];
-        $result = [];
-        $pieces = $this->conn->fetchAll('SELECT * FROM art_piece');
-
-        foreach ($pieces as $piece) {
-            $result[] = $this->fromArray(new ArtPieceId($piece['id']), json_decode($piece['doc'], true));
-        }
-
-        return $result;
+        return array_map(function ($item) {
+            return $this->serializer->deserialize($item['doc']);
+        }, $this->dbal->fetchAll());
     }
 }

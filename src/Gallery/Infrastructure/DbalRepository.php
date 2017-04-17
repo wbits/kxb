@@ -9,7 +9,9 @@ use Doctrine\DBAL\Driver\Statement;
 
 final class DbalRepository
 {
-    const FETCH_ONE_BY_ID = 'SELECT * FROM %s WHERE id = ?';
+    const FETCH_ALL         = 'SELECT * FROM %s';
+    const FETCH_ONE_BY_ID   = self::FETCH_ALL . 'WHERE id = ?';
+    const COUNT_BY_ID       = 'SELECT count(id) FROM %s WHERE id = ?';
 
     private $connection;
     private $tableExpression;
@@ -25,6 +27,14 @@ final class DbalRepository
     {
         $statement = $this->getStatement(sprintf(self::FETCH_ONE_BY_ID, $this->tableExpression));
         $statement->bindValue(1, $id);
+        $statement->execute();
+
+        return $statement->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function fetchAll()
+    {
+        $statement = $this->getStatement(sprintf(self::FETCH_ALL, $this->tableExpression));
         $statement->execute();
 
         return $statement->fetch(\PDO::FETCH_ASSOC);
@@ -46,10 +56,11 @@ final class DbalRepository
 
     private function exists(string $identifier): bool
     {
-        $statement = $this->getStatement(sprintf(self::FETCH_ONE_BY_ID, $this->tableExpression));
+        $statement = $this->getStatement(sprintf(self::COUNT_BY_ID, $this->tableExpression));
         $statement->bindValue(1, $identifier);
+        $statement->execute();
 
-        return $statement->execute();
+        return (bool) $statement->fetchColumn();
     }
 
     private function insert(array $data)
