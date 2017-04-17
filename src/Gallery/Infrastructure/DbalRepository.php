@@ -10,7 +10,7 @@ use Doctrine\DBAL\Driver\Statement;
 final class DbalRepository
 {
     const FETCH_ALL         = 'SELECT * FROM %s';
-    const FETCH_ONE_BY_ID   = self::FETCH_ALL . 'WHERE id = ?';
+    const FETCH_ONE_BY_ID   = self::FETCH_ALL . ' WHERE id = ?';
     const COUNT_BY_ID       = 'SELECT count(id) FROM %s WHERE id = ?';
 
     private $connection;

@@ -9,7 +9,7 @@ use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Wbits\Kxb\Admin\Controller\Provider\ArtControllerProvider;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Silex\Application();
 $app['debug'] = true;
@@ -28,7 +28,7 @@ $app->register(new DoctrineServiceProvider(), array(
 $app->register(new FormServiceProvider());
 $app->register(new TranslationServiceProvider(), ['locale' => 'nl']);
 $app->register(new TwigServiceProvider(), [
-    'twig.path' => __DIR__ . '/app/Resources/views',
+    'twig.path' => __DIR__ . '/Resources/views',
     'twig.form.templates' => [
         'bootstrap_3_layout.html.twig',
         'bootstrap_3_horizontal_layout.html.twig',
