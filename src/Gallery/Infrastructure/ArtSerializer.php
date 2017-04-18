@@ -35,7 +35,7 @@ final class ArtSerializer
                 Dimensions::extract($art['size']),
                 new CreatedInYear(new \DateTimeImmutable($art['year']))
             ),
-            new Availability((int)$art['availability']),
+            new Availability((int) $art['availability']),
             new Price((float) $art['price']),
             new ArtistId('some-artist-id')
         );
@@ -52,4 +52,3 @@ final class ArtSerializer
         return $result;
     }
 }
-

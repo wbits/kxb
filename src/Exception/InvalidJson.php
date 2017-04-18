@@ -11,4 +11,3 @@ final class InvalidJson extends \Exception
         parent::__construct('Invalid JSON: ' . $message, $code, $previous);
     }
 }
-

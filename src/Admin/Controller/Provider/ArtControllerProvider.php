@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Admin\Controller\Provider;
 
-
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Api\BootableProviderInterface;
@@ -38,9 +37,9 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
     {
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
-        $controllers->get('art/{id}', 'artController:showArtPieceAction');
-        $controllers->post('create_art_piece', 'artController:saveArtPieceAction');
-        $controllers->get('create_art_piece', 'artController:createArtPieceFormAction');
+        $controllers->get('art/id/{id}', 'artController:showArtPieceAction');
+        $controllers->post('art/create', 'artController:saveArtPieceAction');
+        $controllers->get('art/create', 'artController:createArtPieceFormAction');
 
         return $controllers;
     }
