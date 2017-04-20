@@ -25,7 +25,8 @@ final class DbalRepository
 
     public function fetchById(string $id)
     {
-        $statement = $this->getStatement(sprintf(self::FETCH_ONE_BY_ID, $this->tableExpression));
+        $sql = sprintf(self::FETCH_ONE_BY_ID, $this->tableExpression);
+        $statement = $this->getStatement($sql);
         $statement->bindValue(1, $id);
         $statement->execute();
 
@@ -37,7 +38,7 @@ final class DbalRepository
         $statement = $this->getStatement(sprintf(self::FETCH_ALL, $this->tableExpression));
         $statement->execute();
 
-        return $statement->fetch(\PDO::FETCH_ASSOC);
+        return $statement->fetchAll();
     }
 
     public function upsert(string $identifier, string $json)

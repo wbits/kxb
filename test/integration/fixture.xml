@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="art_piece">
+        <column>id</column>
+        <column>doc</column>
+        <row>
+            <value>166bbf4b-d684-46a2-bad3-c696c2ede80a</value>
+            <value>{"id": "166bbf4b-d684-46a2-bad3-c696c2ede80a", "size": "50cm x 70cm", "year": "2017", "price": "1000.00", "title": "art piece foo", "material": "foo", "artist_id": "fbca3048-ad2d-4581-81f1-e84048636826", "availability": "100"}</value>
+        </row>
+    </table>
+</dataset>
