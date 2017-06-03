@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace unit\Gallery\Application;
 
 use Wbits\Kxb\Gallery\Domain\Artist;
+use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Infrastructure\InMemoryArtistRepository;
 use PHPUnit\Framework\TestCase;
@@ -43,6 +44,19 @@ final class ArtistServiceTest extends TestCase
         $artist = $this->repository->get($artistId);
 
         self::assertInstanceOf(Artist::class, $artist);
+    }
+
+    public function testItReturnsAListOfArtists()
+    {
+        $artist = new Artist(new ArtistId('1'), new FullName('John', 'Doe'));
+        $this->repository->save($artist);
+
+        $artistList = $this->artistService->getAllArtists();
+
+        self::assertNotEmpty($artistList);
+        foreach ($artistList as $artist) {
+            self::assertInstanceOf(Artist::class, $artist);
+        }
     }
 }
 
