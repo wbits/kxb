@@ -28,14 +28,14 @@ final class ArtController
 
     public function showArtPieceAction($id)
     {
-        $artPiece = $this->artService->getPiece(new ArtId($id));
+        $artPiece = $this->artService->getArt(new ArtId($id));
 
         return new JsonResponse($artPiece->toArray());
     }
 
     public function ArtListAction()
     {
-        $list = $this->artService->getAllPieces();
+        $list = $this->artService->getAllArt();
 
         return new JsonResponse($list);
     }
@@ -58,7 +58,7 @@ final class ArtController
         }
 
         $data = $form->getData();
-        $id = (string) $this->artService->createArtPiece(
+        $id = (string) $this->artService->createArt(
             $data->title(),
             $data->details(),
             $data->availability(),

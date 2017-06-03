@@ -34,14 +34,14 @@ final class ArtServiceTest extends TestCase
 
     public function testItDoesNotReturnAnyArtPiecesWhenNoneWereCreated()
     {
-        $works = $this->artService->getAllPieces();
+        $works = $this->artService->getAllArt();
         self::assertEmpty($works);
     }
 
     public function testItReturnsACollectionOfArtPieces()
     {
         $this->createArtPiece();
-        $works = $this->artService->getAllPieces();
+        $works = $this->artService->getAllArt();
         self::assertCount(1, $works);
     }
 
@@ -49,14 +49,14 @@ final class ArtServiceTest extends TestCase
     {
         $this->createArtPiece();
         $id = new ArtId('1');
-        $work = $this->artService->getPiece($id);
+        $work = $this->artService->getArt($id);
         self::assertInstanceOf(Art::class, $work);
     }
 
     public function testItThrowsAnInvalidArgumentExceptionWhenItCouldNotFindAnArtPieceWithGivenId()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->artService->getPiece(new ArtId(self::NON_EXISTING_ART_PIECE_ID));
+        $this->artService->getArt(new ArtId(self::NON_EXISTING_ART_PIECE_ID));
     }
 
     private function createArtPiece()
@@ -71,6 +71,6 @@ final class ArtServiceTest extends TestCase
         $price = new Price(1200.50);
         $artistId = new ArtistId('1');
 
-        $this->artService->createArtPiece($title, $details, $availability, $price, $artistId);
+        $this->artService->createArt($title, $details, $availability, $price, $artistId);
     }
 }

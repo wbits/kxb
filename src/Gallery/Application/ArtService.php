@@ -22,12 +22,12 @@ final class ArtService
         $this->repository = $repository;
     }
 
-    public function getAllPieces(): array
+    public function getAllArt(): array
     {
         return $this->repository->getAll();
     }
 
-    public function createArtPiece(
+    public function createArt(
         Title $title,
         ArtDetails $details,
         Availability $availability,
@@ -41,7 +41,7 @@ final class ArtService
         return $piece->getId();
     }
 
-    public function getPiece(ArtId $id): Art
+    public function getArt(ArtId $id): Art
     {
         return $this->repository->get($id);
     }
