@@ -8,6 +8,7 @@ use Doctrine\DBAL\DriverManager;
 use integration\Wbits\Kxb\DatabaseTestCase;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
+use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Infrastructure\ArtistSerializer;
 use Wbits\Kxb\Gallery\Infrastructure\DbalRepository;
 use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtistRepository;
@@ -61,6 +62,17 @@ final class DoctrineArtistRepositoryTest extends DatabaseTestCase
         foreach ($artists as $artist) {
             self::assertInstanceOf(Artist::class, $artist);
         }
+    }
+
+    public function testItCanSaveAnArtist()
+    {
+        $id = $this->repository->getNextIdentifier();
+        $artist = new Artist($id, new FullName('Jack', 'FooBar'));
+
+        $this->repository->save($artist);
+        $fetchedArtist = $this->repository->get($id);
+
+        self::assertEquals($artist, $fetchedArtist);
     }
 
     protected function getDataSet()
