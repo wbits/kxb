@@ -40,13 +40,13 @@ final class ArtSerializer
             new ArtId($art['id']),
             new Title($art['title']),
             new ArtDetails(
-                new Material($art['material']),
-                Dimensions::extract($art['size']),
-                new CreatedInYear(new \DateTimeImmutable($art['year']))
+                new Material($art['material'] ?? ''),
+                Dimensions::extract($art['size'] ?? ''),
+                new CreatedInYear(new \DateTimeImmutable($art['year'] ?? 'now'))
             ),
-            new Availability((int) $art['availability']),
-            new Price((float) $art['price']),
-            new ArtistId('some-artist-id')
+            new Availability((int) $art['availability'] ?? 0),
+            new Price((float) $art['price'] ?? 0),
+            new ArtistId($art['artist_id'])
         );
     }
 

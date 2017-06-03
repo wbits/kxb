@@ -20,19 +20,19 @@ final class InMemoryArtRepository implements ArtRepository
         return new ArtId((string) $this->sequence);
     }
 
-    public function save(Art $artPiece)
+    public function save(Art $art)
     {
-        $key = (string) $artPiece->getId();
-        $this->artCollection[$key] = $artPiece;
+        $key = (string) $art->getId();
+        $this->artCollection[$key] = $art;
     }
 
-    public function get(ArtId $artPieceId): Art
+    public function get(ArtId $artId): Art
     {
-        if (!array_key_exists((string) $artPieceId, $this->artCollection)) {
+        if (!array_key_exists((string) $artId, $this->artCollection)) {
             throw new \InvalidArgumentException('Not found');
         }
 
-        return $this->artCollection[(string) $artPieceId];
+        return $this->artCollection[(string) $artId];
     }
 
     /**
