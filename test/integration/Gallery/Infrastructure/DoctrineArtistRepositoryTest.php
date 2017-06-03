@@ -53,6 +53,16 @@ final class DoctrineArtistRepositoryTest extends DatabaseTestCase
         self::assertEquals($artistId, $artist->getId());
     }
 
+    public function testItFetchesAllArtists()
+    {
+        $artists = $this->repository->getAll();
+
+        self::assertNotEmpty($artists);
+        foreach ($artists as $artist) {
+            self::assertInstanceOf(Artist::class, $artist);
+        }
+    }
+
     protected function getDataSet()
     {
         return $this->createXmlDataSet(__DIR__ . '/../../fixture.xml');
