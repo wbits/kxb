@@ -11,8 +11,8 @@ use Wbits\Kxb\Gallery\Infrastructure\DbalRepository;
 
 final class DbalRepositoryTest extends DatabaseTestCase
 {
-    const TEST_ART_PIECE_UUID   = '166bbf4b-d684-46a2-bad3-c696c2ede80a';
-    const TEST_ARTIST_UUID      = 'fbca3048-ad2d-4581-81f1-e84048636826';
+    const TEST_ART_PIECE_UUID = '166bbf4b-d684-46a2-bad3-c696c2ede80a';
+    const TEST_ARTIST_UUID = 'fbca3048-ad2d-4581-81f1-e84048636826';
 
     /**
      * @var DbalRepository
@@ -46,7 +46,7 @@ final class DbalRepositoryTest extends DatabaseTestCase
     public function testItReturnsFalseWhenTryingToFetchSomethingThatDoesNotExist()
     {
         $newUuid = Uuid::uuid4();
-        $result = $this->dbalRepository->fetchById((string)$newUuid);
+        $result = $this->dbalRepository->fetchById((string) $newUuid);
 
         self::assertFalse($result);
     }
@@ -73,8 +73,8 @@ final class DbalRepositoryTest extends DatabaseTestCase
         $json = '{"new": "doc"}';
         $newUuid = Uuid::uuid4();
 
-        $this->dbalRepository->upsert((string)$newUuid, $json);
-        $artPiece = $this->dbalRepository->fetchById((string)$newUuid);
+        $this->dbalRepository->upsert((string) $newUuid, $json);
+        $artPiece = $this->dbalRepository->fetchById((string) $newUuid);
 
         self::assertEquals($json, $artPiece['doc']);
     }
@@ -84,4 +84,3 @@ final class DbalRepositoryTest extends DatabaseTestCase
         return $this->createXMLDataSet(__DIR__ . '/../../fixture.xml');
     }
 }
-

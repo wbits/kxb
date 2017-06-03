@@ -5,10 +5,10 @@ declare(strict_types = 1);
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
 use Wbits\Kxb\Exception\InvalidJson;
-use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\Art;
 use Wbits\Kxb\Gallery\Domain\ArtDetails;
 use Wbits\Kxb\Gallery\Domain\ArtId;
+use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;

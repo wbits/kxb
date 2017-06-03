@@ -9,18 +9,17 @@ use PHPUnit\Framework\TestCase;
 
 abstract class DatabaseTestCase extends TestCase
 {
-    const DB_NAME       = 'kxb_test';
-    const HOST          = '192.168.99.100';
-    const DB_USER       = 'kxbusr';
-    const DB_PASS       = 'kxbpss';
+    use TestCaseTrait;
+    const DB_NAME = 'kxb_test';
+    const HOST = '192.168.99.100';
+    const DB_USER = 'kxbusr';
+    const DB_PASS = 'kxbpss';
 
     /**
      * @var \PDO
      */
     protected static $pdo;
     private $conn;
-
-    use TestCaseTrait;
 
     final public function getConnection()
     {

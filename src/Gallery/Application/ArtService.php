@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Application;
 
-use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\Art;
 use Wbits\Kxb\Gallery\Domain\ArtDetails;
 use Wbits\Kxb\Gallery\Domain\ArtId;
+use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtRepository;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\Price;

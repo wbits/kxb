@@ -1,28 +1,28 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Gallery\Infrastructure;
 
-use Ramsey\Uuid\Uuid;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtistRepository;
 
 final class InMemoryArtistRepository implements ArtistRepository
 {
+    private $sequence = 0;
     private $artistCollection = [];
 
     public function getNextIdentifier(): ArtistId
     {
-        $uuid = Uuid::uuid4();
+        ++$this->sequence;
 
-        return new ArtistId((string) $uuid);
+        return new ArtistId((string) $this->sequence);
     }
 
     public function get(ArtistId $artistId): Artist
     {
-        $key = (string)$artistId;
+        $key = (string) $artistId;
         if (!array_key_exists($key, $this->artistCollection)) {
             throw new \InvalidArgumentException('Artist was not found');
         }
@@ -40,7 +40,7 @@ final class InMemoryArtistRepository implements ArtistRepository
 
     public function save(Artist $artist): void
     {
-        $key = (string)$artist->getId();
+        $key = (string) $artist->getId();
         $this->artistCollection[$key] = $artist;
     }
 }

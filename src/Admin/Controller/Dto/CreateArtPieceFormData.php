@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Admin\Controller\Dto;
 
-use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtDetails;
+use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;

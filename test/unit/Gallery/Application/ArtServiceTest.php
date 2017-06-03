@@ -6,10 +6,10 @@ namespace unit\Wbits\Kxb\Gallery\Application;
 
 use PHPUnit\Framework\TestCase;
 use Wbits\Kxb\Gallery\Application\ArtService;
-use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\Art;
 use Wbits\Kxb\Gallery\Domain\ArtDetails;
 use Wbits\Kxb\Gallery\Domain\ArtId;
+use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;
