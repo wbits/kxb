@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace unit\Gallery\Application;
 
 use Wbits\Kxb\Gallery\Domain\Artist;
+use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Infrastructure\InMemoryArtistRepository;
 use PHPUnit\Framework\TestCase;
 use Wbits\Kxb\Gallery\Application\ArtistService;
@@ -16,11 +17,17 @@ final class ArtistServiceTest extends TestCase
      */
     private $artistService;
 
+    /**
+     * @var InMemoryArtistRepository
+     */
+    private $repository;
+
     protected function setUp()
     {
         parent::setUp();
 
-        $this->artistService = new ArtistService(new InMemoryArtistRepository());
+        $this->repository = new InMemoryArtistRepository();
+        $this->artistService = new ArtistService($this->repository);
     }
 
     public function testItReturnsAnEmptyListOfArtistsWhenNoArtistsWereCreated()
@@ -32,7 +39,8 @@ final class ArtistServiceTest extends TestCase
 
     public function testItCanAddANewArtist()
     {
-        $artist = $this->artistService->addArtist();
+        $artistId = $this->artistService->addArtist(new FullName('John', 'Doe'));
+        $artist = $this->repository->get($artistId);
 
         self::assertInstanceOf(Artist::class, $artist);
     }
