@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
@@ -29,7 +29,7 @@ final class DoctrineArtistRepository implements ArtistRepository
 
     public function get(ArtistId $artistId): Artist
     {
-        $result = $this->dbal->fetchById((string)$artistId);
+        $result = $this->dbal->fetchById((string) $artistId);
 
         return $this->serializer->deserialize($result['doc']);
     }
@@ -40,6 +40,7 @@ final class DoctrineArtistRepository implements ArtistRepository
     public function getAll(): array
     {
         $list = $this->dbal->fetchAll();
+
         return array_map(function ($item) {
             return $this->serializer->deserialize($item['doc']);
         }, $list);
@@ -50,4 +51,3 @@ final class DoctrineArtistRepository implements ArtistRepository
         // TODO: Implement save() method.
     }
 }
-

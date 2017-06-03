@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace integration\Gallery\Infrastructure;
 
 use Doctrine\DBAL\DriverManager;
-use Wbits\Kxb\Gallery\Infrastructure\ArtistSerializer;
-use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtistRepository;
 use integration\Wbits\Kxb\DatabaseTestCase;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
+use Wbits\Kxb\Gallery\Infrastructure\ArtistSerializer;
 use Wbits\Kxb\Gallery\Infrastructure\DbalRepository;
+use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtistRepository;
 
 final class DoctrineArtistRepositoryTest extends DatabaseTestCase
 {
@@ -68,4 +68,3 @@ final class DoctrineArtistRepositoryTest extends DatabaseTestCase
         return $this->createXmlDataSet(__DIR__ . '/../../fixture.xml');
     }
 }
-

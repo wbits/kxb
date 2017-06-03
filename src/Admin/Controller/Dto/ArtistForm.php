@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Wbits\Kxb\Admin\Controller\Dto;
 
@@ -24,6 +24,7 @@ final class ArtistForm
     public function setFirstName(string $firstName): ArtistForm
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -35,7 +36,7 @@ final class ArtistForm
     public function setLastName(string $lastName): ArtistForm
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 }
-

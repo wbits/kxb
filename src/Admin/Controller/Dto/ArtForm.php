@@ -34,7 +34,7 @@ final class ArtForm
         $artistChoices = [];
         /** @var Artist $artist */
         foreach ($artists as $artist) {
-            $key = (string)$artist->getFullName();
+            $key = (string) $artist->getFullName();
             $artistChoices[$key] = (string) $artist->getId();
         }
 
@@ -166,7 +166,7 @@ final class ArtForm
         return $this;
     }
 
-    public function  getArtistChoices(): array
+    public function getArtistChoices(): array
     {
         return $this->artistChoices;
     }

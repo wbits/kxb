@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace unit\Gallery\Application;
 
+use PHPUnit\Framework\TestCase;
+use Wbits\Kxb\Gallery\Application\ArtistService;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\FullName;
 use Wbits\Kxb\Gallery\Infrastructure\InMemoryArtistRepository;
-use PHPUnit\Framework\TestCase;
-use Wbits\Kxb\Gallery\Application\ArtistService;
 
 final class ArtistServiceTest extends TestCase
 {
@@ -70,4 +70,3 @@ final class ArtistServiceTest extends TestCase
         self::assertEquals($artist, $fetchedArtist);
     }
 }
-

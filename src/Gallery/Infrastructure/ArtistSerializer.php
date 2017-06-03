@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
@@ -14,7 +14,7 @@ final class ArtistSerializer
     {
         return json_encode([
             'id' => (string) $artist->getId(),
-            'name' => (string) $artist->getFullName()
+            'name' => (string) $artist->getFullName(),
         ]);
     }
 
@@ -29,4 +29,3 @@ final class ArtistSerializer
         );
     }
 }
-

@@ -35,8 +35,6 @@ final class DbalRepositoryTest extends DatabaseTestCase
         $this->dbalRepository = new DbalRepository(DriverManager::getConnection($connectionParams), 'art_piece');
     }
 
-
-
     public function testItFetchesARowById()
     {
         $result = $this->dbalRepository->fetchById(self::TEST_ART_PIECE_UUID);

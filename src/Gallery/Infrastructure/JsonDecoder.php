@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
@@ -19,4 +19,3 @@ final class JsonDecoder
         return $result;
     }
 }
-

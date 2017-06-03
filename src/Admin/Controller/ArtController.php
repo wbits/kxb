@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wbits\Kxb\Admin\Controller\Dto as Dto;
 use Wbits\Kxb\Admin\Controller\Dto\ArtForm;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtistService;
@@ -48,6 +47,7 @@ final class ArtController
         $list = $this->artService->getAllArt();
         $createArtDto = function (Art $art) {
             $artDto = new Dto\Art($art);
+
             return $artDto->toArray();
         };
 

@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Wbits\Kxb\Admin\Controller\Form;
 
-use Wbits\Kxb\Admin\Controller\Dto\ArtistForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wbits\Kxb\Admin\Controller\Dto\ArtistForm;
 
 final class ArtistType extends AbstractType
 {
@@ -26,6 +26,4 @@ final class ArtistType extends AbstractType
             'data_class' => ArtistForm::class,
         ));
     }
-
 }
-

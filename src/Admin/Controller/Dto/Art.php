@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Wbits\Kxb\Admin\Controller\Dto;
 
@@ -16,6 +16,7 @@ final class Art
     public function toArray(): array
     {
         $art = $this->art;
+
         return [
             'id' => (string) $art->getId(),
             'title' => (string) $art->getTitle(),
@@ -28,4 +29,3 @@ final class Art
         ];
     }
 }
-

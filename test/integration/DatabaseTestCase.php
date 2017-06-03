@@ -4,18 +4,16 @@ declare(strict_types = 1);
 
 namespace integration\Wbits\Kxb;
 
-use Doctrine\DBAL\DriverManager;
 use PHPUnit\DbUnit\TestCaseTrait;
 use PHPUnit\Framework\TestCase;
 
 abstract class DatabaseTestCase extends TestCase
 {
+    use TestCaseTrait;
     const DB_NAME = 'kxb_test';
     const HOST = '192.168.99.100';
     const DB_USER = 'kxbusr';
     const DB_PASS = 'kxbpss';
-
-    use TestCaseTrait;
 
     /**
      * @var \PDO
