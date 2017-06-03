@@ -11,12 +11,12 @@ use Wbits\Kxb\Gallery\Domain\ArtistRepository;
 
 final class DoctrineArtistRepository implements ArtistRepository
 {
-    private $dbalRepository;
+    private $dbal;
     private $serializer;
 
     public function __construct(DbalRepository $dbalRepository, ArtistSerializer $serializer)
     {
-        $this->dbalRepository = $dbalRepository;
+        $this->dbal = $dbalRepository;
         $this->serializer = $serializer;
     }
 
@@ -29,7 +29,7 @@ final class DoctrineArtistRepository implements ArtistRepository
 
     public function get(ArtistId $artistId): Artist
     {
-        $result = $this->dbalRepository->fetchById((string)$artistId);
+        $result = $this->dbal->fetchById((string)$artistId);
 
         return $this->serializer->deserialize($result['doc']);
     }
@@ -41,7 +41,7 @@ final class DoctrineArtistRepository implements ArtistRepository
     {
         return array_map(function ($item) {
             return $this->serializer->deserialize($item['doc']);
-        }, $this->dbalRepository->fetchAll());
+        }, $this->dbal->fetchAll());
     }
 
     public function save(Artist $artist): void
