@@ -8,4 +8,13 @@
             <value>{"id": "166bbf4b-d684-46a2-bad3-c696c2ede80a", "size": "50cm x 70cm", "year": "2017", "price": "1000.00", "title": "art piece foo", "material": "foo", "artist_id": "fbca3048-ad2d-4581-81f1-e84048636826", "availability": "100"}</value>
         </row>
     </table>
+
+    <table name="artist">
+        <column>id</column>
+        <column>doc</column>
+        <row>
+            <value>fbca3048-ad2d-4581-81f1-e84048636826</value>
+            <value>{"id": "fbca3048-ad2d-4581-81f1-e84048636826", "name": "John Doe"}</value>
+        </row>
+    </table>
 </dataset>
