@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceFormData;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
-use Wbits\Kxb\Gallery\Domain\ArtPieceId;
+use Wbits\Kxb\Gallery\Domain\ArtId;
 
 final class ArtController
 {
@@ -28,7 +28,7 @@ final class ArtController
 
     public function showArtPieceAction($id)
     {
-        $artPiece = $this->artService->getPiece(new ArtPieceId($id));
+        $artPiece = $this->artService->getPiece(new ArtId($id));
 
         return new JsonResponse($artPiece->toArray());
     }

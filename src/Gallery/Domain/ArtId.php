@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Domain;
 
-final class ArtPieceId
+final class ArtId
 {
     private $id;
 

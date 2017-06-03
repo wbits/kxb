@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
 use Ramsey\Uuid\Uuid;
-use Wbits\Kxb\Gallery\Domain\ArtPiece;
-use Wbits\Kxb\Gallery\Domain\ArtPieceId;
+use Wbits\Kxb\Gallery\Domain\Art;
+use Wbits\Kxb\Gallery\Domain\ArtId;
 use Wbits\Kxb\Gallery\Domain\ArtRepository;
 
 final class DoctrineArtRepository implements ArtRepository
@@ -20,20 +20,20 @@ final class DoctrineArtRepository implements ArtRepository
         $this->serializer = $serializer;
     }
 
-    public function getNextIdentifier(): ArtPieceId
+    public function getNextIdentifier(): ArtId
     {
         $uuid = Uuid::uuid4();
 
-        return new ArtPieceId((string) $uuid);
+        return new ArtId((string) $uuid);
     }
 
-    public function save(ArtPiece $artPiece): void
+    public function save(Art $artPiece): void
     {
         $data = $this->serializer->serialize($artPiece);
         $this->dbal->upsert((string) $artPiece->getId(), $data);
     }
 
-    public function get(ArtPieceId $artPieceId)
+    public function get(ArtId $artPieceId)
     {
         $result = $this->dbal->fetchById((string) $artPieceId);
 
@@ -41,7 +41,7 @@ final class DoctrineArtRepository implements ArtRepository
     }
 
     /**
-     * @return ArtPiece[]
+     * @return Art[]
      */
     public function getAll(): array
     {

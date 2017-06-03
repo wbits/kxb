@@ -6,14 +6,14 @@ namespace Wbits\Kxb\Gallery\Domain;
 
 interface ArtRepository
 {
-    public function getNextIdentifier(): ArtPieceId;
+    public function getNextIdentifier(): ArtId;
 
-    public function save(ArtPiece $artPiece);
+    public function save(Art $artPiece);
 
-    public function get(ArtPieceId $artPieceId);
+    public function get(ArtId $artPieceId);
 
     /**
-     * @return ArtPiece[]
+     * @return Art[]
      */
     public function getAll(): array;
 }

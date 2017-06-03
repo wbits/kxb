@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Domain;
 
-final class ArtPiece
+final class Art
 {
     private $id;
     private $title;
@@ -14,9 +14,9 @@ final class ArtPiece
     private $artistId;
 
     private function __construct(
-        ArtPieceId $id,
+        ArtId $id,
         Title $title,
-        ArtPieceDetails $details,
+        ArtDetails $details,
         Availability $availability,
         Price $price,
         ArtistId $artistId
@@ -30,17 +30,17 @@ final class ArtPiece
     }
 
     public static function create(
-        ArtPieceId $id,
+        ArtId $id,
         Title $title,
-        ArtPieceDetails $details,
+        ArtDetails $details,
         Availability $availability,
         Price $price,
         ArtistId $artistId
-    ): ArtPiece {
+    ): Art {
         return new self($id, $title, $details, $availability, $price, $artistId);
     }
 
-    public function getId(): ArtPieceId
+    public function getId(): ArtId
     {
         return $this->id;
     }

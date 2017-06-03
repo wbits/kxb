@@ -6,9 +6,9 @@ namespace Wbits\Kxb\Gallery\Infrastructure;
 
 use Wbits\Kxb\Exception\InvalidJson;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
-use Wbits\Kxb\Gallery\Domain\ArtPiece;
-use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
-use Wbits\Kxb\Gallery\Domain\ArtPieceId;
+use Wbits\Kxb\Gallery\Domain\Art;
+use Wbits\Kxb\Gallery\Domain\ArtDetails;
+use Wbits\Kxb\Gallery\Domain\ArtId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;
@@ -18,19 +18,19 @@ use Wbits\Kxb\Gallery\Domain\Title;
 
 final class ArtSerializer
 {
-    public function serialize(ArtPiece $artPiece): string
+    public function serialize(Art $artPiece): string
     {
         return json_encode($artPiece->toArray());
     }
 
-    public function deserialize(string $artPiece): ArtPiece
+    public function deserialize(string $artPiece): Art
     {
         $art = self::decode($artPiece);
 
-        return ArtPiece::create(
-            new ArtPieceId($art['id']),
+        return Art::create(
+            new ArtId($art['id']),
             new Title($art['title']),
-            new ArtPieceDetails(
+            new ArtDetails(
                 new Material($art['material']),
                 Dimensions::extract($art['size']),
                 new CreatedInYear(new \DateTimeImmutable($art['year']))

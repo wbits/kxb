@@ -7,9 +7,9 @@ namespace unit\Wbits\Kxb\Gallery\Application;
 use PHPUnit\Framework\TestCase;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
-use Wbits\Kxb\Gallery\Domain\ArtPiece;
-use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
-use Wbits\Kxb\Gallery\Domain\ArtPieceId;
+use Wbits\Kxb\Gallery\Domain\Art;
+use Wbits\Kxb\Gallery\Domain\ArtDetails;
+use Wbits\Kxb\Gallery\Domain\ArtId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
 use Wbits\Kxb\Gallery\Domain\Dimensions;
@@ -35,34 +35,34 @@ final class ArtServiceTest extends TestCase
     public function testItDoesNotReturnAnyArtPiecesWhenNoneWereCreated()
     {
         $works = $this->artService->getAllPieces();
-        static::assertEmpty($works);
+        self::assertEmpty($works);
     }
 
     public function testItReturnsACollectionOfArtPieces()
     {
         $this->createArtPiece();
         $works = $this->artService->getAllPieces();
-        static::assertCount(1, $works);
+        self::assertCount(1, $works);
     }
 
     public function testItCanFetchAnArtPieceById()
     {
         $this->createArtPiece();
-        $id = new ArtPieceId('1');
+        $id = new ArtId('1');
         $work = $this->artService->getPiece($id);
-        self::assertInstanceOf(ArtPiece::class, $work);
+        self::assertInstanceOf(Art::class, $work);
     }
 
     public function testItThrowsAnInvalidArgumentExceptionWhenItCouldNotFindAnArtPieceWithGivenId()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->artService->getPiece(new ArtPieceId(self::NON_EXISTING_ART_PIECE_ID));
+        $this->artService->getPiece(new ArtId(self::NON_EXISTING_ART_PIECE_ID));
     }
 
     private function createArtPiece()
     {
         $title = new Title('title');
-        $details = new ArtPieceDetails(
+        $details = new ArtDetails(
             new Material('paint on canvas'),
             new Dimensions('60 cm', '50 cm'),
             new CreatedInYear(new \DateTimeImmutable('2015'))

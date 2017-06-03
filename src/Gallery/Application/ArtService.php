@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace Wbits\Kxb\Gallery\Application;
 
 use Wbits\Kxb\Gallery\Domain\ArtistId;
-use Wbits\Kxb\Gallery\Domain\ArtPiece;
-use Wbits\Kxb\Gallery\Domain\ArtPieceDetails;
-use Wbits\Kxb\Gallery\Domain\ArtPieceId;
+use Wbits\Kxb\Gallery\Domain\Art;
+use Wbits\Kxb\Gallery\Domain\ArtDetails;
+use Wbits\Kxb\Gallery\Domain\ArtId;
 use Wbits\Kxb\Gallery\Domain\ArtRepository;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\Price;
@@ -29,19 +29,19 @@ final class ArtService
 
     public function createArtPiece(
         Title $title,
-        ArtPieceDetails $details,
+        ArtDetails $details,
         Availability $availability,
         Price $price,
         ArtistId $artistId
-    ): ArtPieceId {
+    ): ArtId {
         $id = $this->repository->getNextIdentifier();
-        $piece = ArtPiece::create($id, $title, $details, $availability, $price, $artistId);
+        $piece = Art::create($id, $title, $details, $availability, $price, $artistId);
         $this->repository->save($piece);
 
         return $piece->getId();
     }
 
-    public function getPiece(ArtPieceId $id): ArtPiece
+    public function getPiece(ArtId $id): Art
     {
         return $this->repository->get($id);
     }

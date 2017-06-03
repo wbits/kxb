@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
-use Wbits\Kxb\Gallery\Domain\ArtPiece;
-use Wbits\Kxb\Gallery\Domain\ArtPieceId;
+use Wbits\Kxb\Gallery\Domain\Art;
+use Wbits\Kxb\Gallery\Domain\ArtId;
 use Wbits\Kxb\Gallery\Domain\ArtRepository;
 
 final class InMemoryArtRepository implements ArtRepository
@@ -13,20 +13,20 @@ final class InMemoryArtRepository implements ArtRepository
     private $sequence = 0;
     private $artCollection = [];
 
-    public function getNextIdentifier(): ArtPieceId
+    public function getNextIdentifier(): ArtId
     {
         ++$this->sequence;
 
-        return new ArtPieceId((string) $this->sequence);
+        return new ArtId((string) $this->sequence);
     }
 
-    public function save(ArtPiece $artPiece)
+    public function save(Art $artPiece)
     {
         $key = (string) $artPiece->getId();
         $this->artCollection[$key] = $artPiece;
     }
 
-    public function get(ArtPieceId $artPieceId): ArtPiece
+    public function get(ArtId $artPieceId): Art
     {
         if (!array_key_exists((string) $artPieceId, $this->artCollection)) {
             throw new \InvalidArgumentException('Not found');
@@ -36,7 +36,7 @@ final class InMemoryArtRepository implements ArtRepository
     }
 
     /**
-     * @return ArtPiece[]
+     * @return Art[]
      */
     public function getAll(): array
     {
