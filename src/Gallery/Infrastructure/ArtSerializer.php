@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Wbits\Kxb\Gallery\Infrastructure;
 
-use Wbits\Kxb\Exception\InvalidJson;
 use Wbits\Kxb\Gallery\Domain\Art;
 use Wbits\Kxb\Gallery\Domain\ArtDetails;
 use Wbits\Kxb\Gallery\Domain\ArtId;
@@ -18,23 +17,23 @@ use Wbits\Kxb\Gallery\Domain\Title;
 
 final class ArtSerializer
 {
-    public function serialize(Art $artPiece): string
+    public function serialize(Art $art): string
     {
         return json_encode([
-            'id' => (string) $artPiece->getId(),
-            'title' => (string) $artPiece->getTitle(),
-            'material' => (string) $artPiece->getMaterial(),
-            'size' => (string) $artPiece->getSize(),
-            'year' => (string) $artPiece->getYear(),
-            'availability' => (string) $artPiece->getAvailability(),
-            'price' => (string) $artPiece->getPrice(),
-            'artist_id' => (string) $artPiece->getArtistId(),
+            'id' => (string) $art->getId(),
+            'title' => (string) $art->getTitle(),
+            'material' => (string) $art->getMaterial(),
+            'size' => (string) $art->getSize(),
+            'year' => (string) $art->getYear(),
+            'availability' => (string) $art->getAvailability(),
+            'price' => (string) $art->getPrice(),
+            'artist_id' => (string) $art->getArtistId(),
         ]);
     }
 
-    public function deserialize(string $artPiece): Art
+    public function deserialize(string $json): Art
     {
-        $art = self::decode($artPiece);
+        $art = JsonDecoder::decode($json);
 
         return Art::create(
             new ArtId($art['id']),
@@ -48,16 +47,5 @@ final class ArtSerializer
             new Price((float) $art['price'] ?? 0),
             new ArtistId($art['artist_id'])
         );
-    }
-
-    private static function decode($json)
-    {
-        $result = json_decode($json, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            $message = json_last_error_msg();
-            throw new InvalidJson($message);
-        }
-
-        return $result;
     }
 }
