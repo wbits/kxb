@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Gallery\Infrastructure;
+namespace Wbits\Kxb\Gallery\Infrastructure;
 
 use Ramsey\Uuid\Uuid;
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\ArtistRepository;
-use Wbits\Kxb\Gallery\Infrastructure\DbalRepository;
 
 final class DoctrineArtistRepository implements ArtistRepository
 {
