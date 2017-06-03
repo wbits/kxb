@@ -30,6 +30,9 @@ final class DoctrineArtistRepository implements ArtistRepository
     public function get(ArtistId $artistId): Artist
     {
         $result = $this->dbal->fetchById((string) $artistId);
+        if (!$result) {
+            throw new \InvalidArgumentException('Artist was not found');
+        }
 
         return $this->serializer->deserialize($result['doc']);
     }
@@ -48,6 +51,7 @@ final class DoctrineArtistRepository implements ArtistRepository
 
     public function save(Artist $artist): void
     {
-        // TODO: Implement save() method.
+        $json = $this->serializer->serialize($artist);
+        $this->dbal->upsert((string) $artist->getId(), $json);
     }
 }
