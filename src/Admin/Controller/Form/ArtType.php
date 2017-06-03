@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wbits\Kxb\Admin\Controller\Dto\CreateArtDto;
+use Wbits\Kxb\Admin\Controller\Dto\ArtForm;
 
 final class ArtType extends AbstractType
 {
@@ -29,7 +29,7 @@ final class ArtType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => CreateArtDto::class,
+            'data_class' => ArtForm::class,
         ));
     }
 }

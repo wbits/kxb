@@ -8,9 +8,11 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wbits\Kxb\Admin\Controller\Dto\CreateArtDto;
+use Wbits\Kxb\Admin\Controller\Dto as Dto;
+use Wbits\Kxb\Admin\Controller\Dto\ArtForm;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
+use Wbits\Kxb\Gallery\Domain\Art;
 use Wbits\Kxb\Gallery\Domain\ArtId;
 
 final class ArtController
@@ -26,29 +28,34 @@ final class ArtController
         $this->twig = $twig;
     }
 
-    public function showArtPieceAction($id)
+    public function getArtAction($id)
     {
         $artPiece = $this->artService->getArt(new ArtId($id));
+        $artDto = new Dto\Art($artPiece);
 
-        return new JsonResponse($artPiece->toArray());
+        return new JsonResponse($artDto->toArray());
     }
 
-    public function ArtListAction()
+    public function getArtListAction()
     {
         $list = $this->artService->getAllArt();
+        $createArtDto = function (Art $art) {
+            $artDto = new Dto\Art($art);
+            return $artDto->toArray();
+        };
 
-        return new JsonResponse($list);
+        return $this->twig->render('admin/art/list.html.twig', ['list' => array_map($createArtDto, $list)]);
     }
 
-    public function createArtPieceFormAction()
+    public function createArtFormAction()
     {
-        $data = new CreateArtDto();
+        $data = new ArtForm();
         $form = $this->formFactory->create(ArtType::class, $data);
 
         return $this->twig->render('admin/art/create.html.twig', ['form' => $form->createView()]);
     }
 
-    public function saveArtPieceAction(Request $request)
+    public function saveArtAction(Request $request)
     {
         $form = $this->formFactory->create(ArtType::class);
         $form->handleRequest($request);

@@ -1,0 +1,33 @@
+{# app/Resources/views/admin/art/list.html.twig #}
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Art{% endblock %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h3>Art list</h3></div>
+
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <th>Title</th>
+                <th>Material</th>
+                <th>Size</th>
+                <th>Year</th>
+                <th>Availability</th>
+                <th>Price</th>
+            </tr>
+            {% for art in list %}
+                <tr>
+                    <td><a href="/admin/art/{{ art.id }}">{{ art.title|e }}</a></td>
+                    <td>{{ art.material }}</td>
+                    <td>{{ art.size }}</td>
+                    <td>{{ art.year }}</td>
+                    <td>{{ art.availability }} pieces</td>
+                    <td>{{ art.price }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

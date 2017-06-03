@@ -37,9 +37,11 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
     {
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
-        $controllers->get('art/id/{id}', 'artController:showArtPieceAction');
-        $controllers->post('art/create', 'artController:saveArtPieceAction');
-        $controllers->get('art/create', 'artController:createArtPieceFormAction');
+
+        $controllers->post('art/create', 'artController:saveArtAction');
+        $controllers->get('art/create', 'artController:createArtFormAction');
+        $controllers->get('art/{id}', 'artController:getArtAction');
+        $controllers->get('art', 'artController:getArtListAction');
 
         return $controllers;
     }

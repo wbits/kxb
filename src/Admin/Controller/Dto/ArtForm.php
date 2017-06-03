@@ -13,7 +13,7 @@ use Wbits\Kxb\Gallery\Domain\Material;
 use Wbits\Kxb\Gallery\Domain\Price;
 use Wbits\Kxb\Gallery\Domain\Title;
 
-final class CreateArtDto
+final class ArtForm
 {
     private $title;
     private $material;
@@ -72,7 +72,7 @@ final class CreateArtDto
     public function details(): ArtDetails
     {
         return new ArtDetails(
-            new Material($this->title),
+            new Material($this->material),
             new Dimensions($this->width, $this->height),
             new CreatedInYear(new \DateTimeImmutable($this->year))
         );
@@ -93,56 +93,56 @@ final class CreateArtDto
         return new ArtistId('1');
     }
 
-    public function setTitle($title): CreateArtDto
+    public function setTitle($title): ArtForm
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function setMaterial($material): CreateArtDto
+    public function setMaterial($material): ArtForm
     {
         $this->material = $material;
 
         return $this;
     }
 
-    public function setWidth($width): CreateArtDto
+    public function setWidth($width): ArtForm
     {
         $this->width = $width;
 
         return $this;
     }
 
-    public function setHeight($height): CreateArtDto
+    public function setHeight($height): ArtForm
     {
         $this->height = $height;
 
         return $this;
     }
 
-    public function setYear($year): CreateArtDto
+    public function setYear($year): ArtForm
     {
         $this->year = $year;
 
         return $this;
     }
 
-    public function setNumberOfCopies($numberOfCopies): CreateArtDto
+    public function setNumberOfCopies($numberOfCopies): ArtForm
     {
         $this->numberOfCopies = $numberOfCopies;
 
         return $this;
     }
 
-    public function setPrice($price): CreateArtDto
+    public function setPrice($price): ArtForm
     {
         $this->price = $price;
 
         return $this;
     }
 
-    public function setArtistId($artistId): CreateArtDto
+    public function setArtistId($artistId): ArtForm
     {
         $this->artistId = $artistId;
 
