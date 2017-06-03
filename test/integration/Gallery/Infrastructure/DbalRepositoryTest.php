@@ -25,16 +25,17 @@ final class DbalRepositoryTest extends DatabaseTestCase
 
         $connectionParams = [
             'driver' => 'pdo_pgsql',
-            'user' => 'kxbusr',
-            'password' => 'kxbpss',
-            'dbname' => 'kxb_test',
-            'host' => '192.168.99.100',
+            'user' => self::DB_USER,
+            'password' => self::DB_PASS,
+            'dbname' => self::DB_NAME,
+            'host' => self::HOST,
             'port' => '5432',
         ];
 
-        $connection = DriverManager::getConnection($connectionParams);
-        $this->dbalRepository = new DbalRepository($connection, 'art_piece');
+        $this->dbalRepository = new DbalRepository(DriverManager::getConnection($connectionParams), 'art_piece');
     }
+
+
 
     public function testItFetchesARowById()
     {
@@ -81,6 +82,6 @@ final class DbalRepositoryTest extends DatabaseTestCase
 
     protected function getDataSet()
     {
-        return $this->createXMLDataSet(__DIR__ . '/../../fixture.xml');
+        return $this->createXmlDataSet(__DIR__ . '/../../fixture.xml');
     }
 }
