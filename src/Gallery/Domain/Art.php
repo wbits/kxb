@@ -45,17 +45,38 @@ final class Art
         return $this->id;
     }
 
-    public function toArray(): array
+    public function getArtistId(): ArtistId
     {
-        return [
-            'id' => (string) $this->id,
-            'title' => (string) $this->title,
-            'material' => (string) $this->details->getMaterial(),
-            'size' => (string) $this->details->getSize(),
-            'year' => (string) $this->details->getYear(),
-            'availability' => (string) $this->availability,
-            'price' => (string) $this->price,
-            'artist_id' => (string) $this->artistId,
-        ];
+        return $this->artistId;
+    }
+
+    public function getTitle(): Title
+    {
+        return $this->title;
+    }
+
+    public function getMaterial(): Material
+    {
+        return $this->details->getMaterial();
+    }
+
+    public function getSize(): Dimensions
+    {
+        return $this->details->getSize();
+    }
+
+    public function getYear(): CreatedInYear
+    {
+        return $this->details->getYear();
+    }
+
+    public function getAvailability(): Availability
+    {
+        return $this->availability;
+    }
+
+    public function getPrice(): Price
+    {
+        return $this->price;
     }
 }

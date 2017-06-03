@@ -20,7 +20,16 @@ final class ArtSerializer
 {
     public function serialize(Art $artPiece): string
     {
-        return json_encode($artPiece->toArray());
+        return json_encode([
+            'id' => (string) $artPiece->getId(),
+            'title' => (string) $artPiece->getTitle(),
+            'material' => (string) $artPiece->getMaterial(),
+            'size' => (string) $artPiece->getSize(),
+            'year' => (string) $artPiece->getYear(),
+            'availability' => (string) $artPiece->getAvailability(),
+            'price' => (string) $artPiece->getPrice(),
+            'artist_id' => (string) $artPiece->getArtistId(),
+        ]);
     }
 
     public function deserialize(string $artPiece): Art
