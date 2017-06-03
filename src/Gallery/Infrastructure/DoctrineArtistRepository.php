@@ -12,10 +12,12 @@ use Wbits\Kxb\Gallery\Domain\ArtistRepository;
 final class DoctrineArtistRepository implements ArtistRepository
 {
     private $dbalRepository;
+    private $serializer;
 
-    public function __construct(DbalRepository $dbalRepository)
+    public function __construct(DbalRepository $dbalRepository, ArtistSerializer $serializer)
     {
         $this->dbalRepository = $dbalRepository;
+        $this->serializer = $serializer;
     }
 
     public function getNextIdentifier(): ArtistId
@@ -27,7 +29,9 @@ final class DoctrineArtistRepository implements ArtistRepository
 
     public function get(ArtistId $artistId): Artist
     {
-        // TODO: Implement get() method.
+        $result = $this->dbalRepository->fetchById((string)$artistId);
+
+        return $this->serializer->deserialize($result['doc']);
     }
 
     /**

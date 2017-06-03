@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace integration\Gallery\Infrastructure;
 
 use Doctrine\DBAL\DriverManager;
+use Wbits\Kxb\Gallery\Infrastructure\ArtistSerializer;
 use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtistRepository;
 use integration\Wbits\Kxb\DatabaseTestCase;
 use Wbits\Kxb\Gallery\Domain\Artist;
@@ -39,7 +40,7 @@ final class DoctrineArtistRepositoryTest extends DatabaseTestCase
         ];
 
         $this->dbalRepository = new DbalRepository(DriverManager::getConnection($connectionParams), 'artist');
-        $this->repository = new DoctrineArtistRepository($this->dbalRepository);
+        $this->repository = new DoctrineArtistRepository($this->dbalRepository, new ArtistSerializer());
     }
 
     public function testItCanFetchAnArtistById()
