@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceFormData;
+use Wbits\Kxb\Admin\Controller\Dto\CreateArtDto;
 
 final class ArtType extends AbstractType
 {
@@ -20,16 +20,16 @@ final class ArtType extends AbstractType
             ->add('width')
             ->add('height')
             ->add('year')
-            ->add('number_of_copies')
+            ->add('numberOfCopies')
             ->add('price')
-            ->add('artist_id')
+            ->add('artistId')
             ->add('save', SubmitType::class, ['label' => 'Save']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => CreateArtPieceFormData::class,
+            'data_class' => CreateArtDto::class,
         ));
     }
 }

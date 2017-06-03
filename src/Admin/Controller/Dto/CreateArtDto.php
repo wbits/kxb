@@ -13,16 +13,16 @@ use Wbits\Kxb\Gallery\Domain\Material;
 use Wbits\Kxb\Gallery\Domain\Price;
 use Wbits\Kxb\Gallery\Domain\Title;
 
-final class CreateArtPieceFormData
+final class CreateArtDto
 {
     private $title;
     private $material;
     private $width;
     private $height;
     private $year;
-    private $number_of_copies;
+    private $numberOfCopies;
     private $price;
-    private $artist_id;
+    private $artistId;
 
     public function getTitle()
     {
@@ -51,7 +51,7 @@ final class CreateArtPieceFormData
 
     public function getNumberOfCopies()
     {
-        return $this->number_of_copies;
+        return $this->numberOfCopies;
     }
 
     public function getPrice()
@@ -61,7 +61,7 @@ final class CreateArtPieceFormData
 
     public function getArtistId()
     {
-        return $this->artist_id;
+        return $this->artistId;
     }
 
     public function title(): Title
@@ -80,7 +80,7 @@ final class CreateArtPieceFormData
 
     public function availability(): Availability
     {
-        return new Availability((int) $this->number_of_copies);
+        return new Availability((int) $this->numberOfCopies);
     }
 
     public function price(): Price
@@ -93,58 +93,58 @@ final class CreateArtPieceFormData
         return new ArtistId('1');
     }
 
-    public function setTitle($title): CreateArtPieceFormData
+    public function setTitle($title): CreateArtDto
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function setMaterial($material): CreateArtPieceFormData
+    public function setMaterial($material): CreateArtDto
     {
         $this->material = $material;
 
         return $this;
     }
 
-    public function setWidth($width): CreateArtPieceFormData
+    public function setWidth($width): CreateArtDto
     {
         $this->width = $width;
 
         return $this;
     }
 
-    public function setHeight($height): CreateArtPieceFormData
+    public function setHeight($height): CreateArtDto
     {
         $this->height = $height;
 
         return $this;
     }
 
-    public function setYear($year): CreateArtPieceFormData
+    public function setYear($year): CreateArtDto
     {
         $this->year = $year;
 
         return $this;
     }
 
-    public function setNumberOfCopies($number_of_copies): CreateArtPieceFormData
+    public function setNumberOfCopies($numberOfCopies): CreateArtDto
     {
-        $this->number_of_copies = $number_of_copies;
+        $this->numberOfCopies = $numberOfCopies;
 
         return $this;
     }
 
-    public function setPrice($price): CreateArtPieceFormData
+    public function setPrice($price): CreateArtDto
     {
         $this->price = $price;
 
         return $this;
     }
 
-    public function setArtistId($artist_id): CreateArtPieceFormData
+    public function setArtistId($artistId): CreateArtDto
     {
-        $this->artist_id = $artist_id;
+        $this->artistId = $artistId;
 
         return $this;
     }

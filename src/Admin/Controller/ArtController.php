@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wbits\Kxb\Admin\Controller\Dto\CreateArtPieceFormData;
+use Wbits\Kxb\Admin\Controller\Dto\CreateArtDto;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Domain\ArtId;
@@ -42,7 +42,7 @@ final class ArtController
 
     public function createArtPieceFormAction()
     {
-        $data = new CreateArtPieceFormData();
+        $data = new CreateArtDto();
         $form = $this->formFactory->create(ArtType::class, $data);
 
         return $this->twig->render('admin/art/create.html.twig', ['form' => $form->createView()]);
