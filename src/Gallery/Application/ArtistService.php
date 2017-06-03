@@ -31,5 +31,9 @@ final class ArtistService
 
         return $id;
     }
+
+    public function getArtist($artistId)
+    {
+    }
 }
 

@@ -58,5 +58,16 @@ final class ArtistServiceTest extends TestCase
             self::assertInstanceOf(Artist::class, $artist);
         }
     }
+
+    public function testItReturnsASingleArtistById()
+    {
+        $artistId = new ArtistId('1');
+        $artist = new Artist($artistId, new FullName('John', 'Doe'));
+        $this->repository->save($artist);
+
+        $fetchedArtist = $this->artistService->getArtist($artistId);
+
+        self::assertEquals($artist, $fetchedArtist);
+    }
 }
 
