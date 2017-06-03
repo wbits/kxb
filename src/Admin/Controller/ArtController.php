@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Wbits\Kxb\Admin\Controller;
 
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,20 +57,18 @@ final class ArtController
 
     public function createArtFormAction()
     {
-        $artists = $this->artistService->getAllArtists();
-        $data = new ArtForm($artists);
-        $form = $this->formFactory->create(ArtType::class, $data);
+        $form = $this->createArtForm();
 
         return $this->twig->render('admin/art/create.html.twig', ['form' => $form->createView()]);
     }
 
     public function saveArtAction(Request $request)
     {
-        $form = $this->formFactory->create(ArtType::class);
+        $form = $this->createArtForm();
         $form->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            return new RedirectResponse('admin/create_art_piece', ['form' => $form->createView()]);
+            return new RedirectResponse('admin/art/create', ['form' => $form->createView()]);
         }
 
         $data = $form->getData();
@@ -82,5 +81,12 @@ final class ArtController
         );
 
         return new RedirectResponse(sprintf('/admin/art/%s', $id));
+    }
+
+    private function createArtForm(): FormInterface
+    {
+        $artists = $this->artistService->getAllArtists();
+
+        return $this->formFactory->create(ArtType::class, new ArtForm($artists));
     }
 }

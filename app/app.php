@@ -8,6 +8,7 @@ use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Wbits\Kxb\Admin\Controller\Provider\ArtControllerProvider;
+use Wbits\Kxb\Admin\Controller\Provider\ArtistControllerProvider;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -44,5 +45,6 @@ $app->register(new Silex\Provider\AssetServiceProvider(), [
     ],
 ]);
 $app->register(new ArtControllerProvider());
+$app->register(new ArtistControllerProvider());
 
 return $app;

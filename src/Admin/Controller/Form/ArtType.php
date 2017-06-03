@@ -15,6 +15,13 @@ final class ArtType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $data = $builder->getData();
+        $artistChoices = [];
+
+        if ($data instanceof ArtForm) {
+            $artistChoices = $data->getArtistChoices();
+        }
+
         $builder
             ->add('title')
             ->add('material')
@@ -23,7 +30,7 @@ final class ArtType extends AbstractType
             ->add('year')
             ->add('numberOfCopies')
             ->add('price')
-            ->add('artistId', ChoiceType::class, ['choices' => $builder->getData()->getArtistChoices()])
+            ->add('artistId', ChoiceType::class, ['choices' => $artistChoices])
             ->add('save', SubmitType::class, ['label' => 'Save']);
     }
 

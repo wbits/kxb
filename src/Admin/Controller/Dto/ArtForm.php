@@ -107,7 +107,7 @@ final class ArtForm
 
     public function artistId(): ArtistId
     {
-        return new ArtistId('1');
+        return new ArtistId($this->artistId);
     }
 
     public function setTitle($title): ArtForm

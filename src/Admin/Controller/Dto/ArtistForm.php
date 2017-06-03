@@ -16,7 +16,7 @@ final class ArtistForm
         return new FullName($this->firstName, $this->lastName);
     }
 
-    public function getFirstName(): string
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -28,7 +28,7 @@ final class ArtistForm
         return $this;
     }
 
-    public function getLastName(): string
+    public function getLastName()
     {
         return $this->lastName;
     }
