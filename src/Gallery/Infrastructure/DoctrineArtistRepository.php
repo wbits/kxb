@@ -39,7 +39,9 @@ final class DoctrineArtistRepository implements ArtistRepository
      */
     public function getAll(): array
     {
-        // TODO: Implement getAll() method.
+        return array_map(function ($item) {
+            return $this->serializer->deserialize($item['doc']);
+        }, $this->dbalRepository->fetchAll());
     }
 
     public function save(Artist $artist): void
