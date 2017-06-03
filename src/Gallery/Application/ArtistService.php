@@ -20,7 +20,7 @@ final class ArtistService
 
     public function getAllArtists(): array
     {
-        return [];
+        return $this->repository->getAll();
     }
 
     public function addArtist(FullName $fullName): ArtistId
