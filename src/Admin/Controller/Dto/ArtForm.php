@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Wbits\Kxb\Admin\Controller\Dto;
 
 use Wbits\Kxb\Gallery\Domain\ArtDetails;
+use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
 use Wbits\Kxb\Gallery\Domain\Availability;
 use Wbits\Kxb\Gallery\Domain\CreatedInYear;
@@ -23,6 +24,22 @@ final class ArtForm
     private $numberOfCopies;
     private $price;
     private $artistId;
+    private $artistChoices;
+
+    /**
+     * @param array|Artist $artists
+     */
+    public function __construct(array $artists)
+    {
+        $artistChoices = [];
+        /** @var Artist $artist */
+        foreach ($artists as $artist) {
+            $key = (string)$artist->getFullName();
+            $artistChoices[$key] = (string) $artist->getId();
+        }
+
+        $this->artistChoices = $artistChoices;
+    }
 
     public function getTitle()
     {
@@ -147,5 +164,10 @@ final class ArtForm
         $this->artistId = $artistId;
 
         return $this;
+    }
+
+    public function  getArtistChoices(): array
+    {
+        return $this->artistChoices;
     }
 }

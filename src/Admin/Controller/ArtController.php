@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Wbits\Kxb\Admin\Controller\Dto as Dto;
 use Wbits\Kxb\Admin\Controller\Dto\ArtForm;
 use Wbits\Kxb\Admin\Controller\Form\ArtType;
+use Wbits\Kxb\Gallery\Application\ArtistService;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Domain\Art;
 use Wbits\Kxb\Gallery\Domain\ArtId;
@@ -18,12 +19,18 @@ use Wbits\Kxb\Gallery\Domain\ArtId;
 final class ArtController
 {
     private $artService;
+    private $artistService;
     private $formFactory;
     private $twig;
 
-    public function __construct(ArtService $artService, FormFactory $formFactory, \Twig_Environment $twig)
-    {
+    public function __construct(
+        ArtService $artService,
+        ArtistService $artistService,
+        FormFactory $formFactory,
+        \Twig_Environment $twig
+    ) {
         $this->artService = $artService;
+        $this->artistService = $artistService;
         $this->formFactory = $formFactory;
         $this->twig = $twig;
     }
@@ -49,7 +56,8 @@ final class ArtController
 
     public function createArtFormAction()
     {
-        $data = new ArtForm();
+        $artists = $this->artistService->getAllArtists();
+        $data = new ArtForm($artists);
         $form = $this->formFactory->create(ArtType::class, $data);
 
         return $this->twig->render('admin/art/create.html.twig', ['form' => $form->createView()]);

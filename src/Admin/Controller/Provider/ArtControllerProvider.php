@@ -13,9 +13,12 @@ use Silex\Application;
 use Silex\ControllerCollection;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wbits\Kxb\Admin\Controller\ArtController;
+use Wbits\Kxb\Gallery\Application\ArtistService;
 use Wbits\Kxb\Gallery\Application\ArtService;
+use Wbits\Kxb\Gallery\Infrastructure\ArtistSerializer;
 use Wbits\Kxb\Gallery\Infrastructure\ArtSerializer;
 use Wbits\Kxb\Gallery\Infrastructure\DbalRepository;
+use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtistRepository;
 use Wbits\Kxb\Gallery\Infrastructure\DoctrineArtRepository;
 
 final class ArtControllerProvider implements ControllerProviderInterface, ServiceProviderInterface, EventListenerProviderInterface, BootableProviderInterface
@@ -23,12 +26,23 @@ final class ArtControllerProvider implements ControllerProviderInterface, Servic
     public function register(Container $pimple)
     {
         $pimple['artController'] = function (Container $pimple) {
-            return new ArtController($pimple['artService'], $pimple['form.factory'], $pimple['twig']);
+            return new ArtController(
+                $pimple['artService'],
+                $pimple['artistService'],
+                $pimple['form.factory'],
+                $pimple['twig']
+            );
         };
 
         $pimple['artService'] = function (Container $pimple) {
             return new ArtService(
                 new DoctrineArtRepository(new DbalRepository($pimple['db'], 'art_piece'), new ArtSerializer())
+            );
+        };
+
+        $pimple['artistService'] = function (Container $pimple) {
+            return new ArtistService(
+                new DoctrineArtistRepository(new DbalRepository($pimple['db'], 'artist'), new ArtistSerializer())
             );
         };
     }
