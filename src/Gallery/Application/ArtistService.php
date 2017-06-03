@@ -32,8 +32,9 @@ final class ArtistService
         return $id;
     }
 
-    public function getArtist($artistId)
+    public function getArtist(ArtistId $artistId)
     {
+        return $this->repository->get($artistId);
     }
 }
 
