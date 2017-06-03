@@ -10,5 +10,9 @@ final class ArtistService
     {
         return [];
     }
+
+    public function addArtist()
+    {
+    }
 }
 
