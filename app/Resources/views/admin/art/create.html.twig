@@ -1,8 +1,21 @@
 {# app/Resources/views/admin/art/create.html.twig #}
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Create New Art Piece{% endblock %}
+{% block title %}Create New Art{% endblock %}
 
 {% block body %}
-    {{ form(form) }}
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <h3>Art form</h3>
+        </div>
+        <div class="panel-body">
+            <a href="/admin/artists/add">add new artist</a>
+        </div>
+        {{ form(form) }}
+    </div>
+
+
+
+
 {% endblock %}

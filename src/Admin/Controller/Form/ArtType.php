@@ -6,7 +6,9 @@ namespace Wbits\Kxb\Admin\Controller\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wbits\Kxb\Admin\Controller\Dto\ArtForm;
@@ -15,22 +17,23 @@ final class ArtType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $data = $builder->getData();
-        $artistChoices = [];
-
-        if ($data instanceof ArtForm) {
-            $artistChoices = $data->getArtistChoices();
-        }
-
         $builder
+            ->add('artistId',
+                ChoiceType::class,
+                [
+                    'choices' => $builder->getData()->getArtistChoices(),
+                    'placeholder' => 'Choose an Artist',
+                    'label' => 'Artist'
+                ]
+            )
             ->add('title')
             ->add('material')
             ->add('width')
             ->add('height')
             ->add('year')
-            ->add('numberOfCopies')
+            ->add('numberOfCopies', TextType::class, ['label' => 'Availability'])
             ->add('price')
-            ->add('artistId', ChoiceType::class, ['choices' => $artistChoices])
+            ->add('attachments', FileType::class, ['multiple' => true])
             ->add('save', SubmitType::class, ['label' => 'Save']);
     }
 

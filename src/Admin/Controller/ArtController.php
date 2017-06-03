@@ -6,6 +6,7 @@ namespace Wbits\Kxb\Admin\Controller;
 
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ use Wbits\Kxb\Gallery\Application\ArtistService;
 use Wbits\Kxb\Gallery\Application\ArtService;
 use Wbits\Kxb\Gallery\Domain\Art;
 use Wbits\Kxb\Gallery\Domain\ArtId;
+use Wbits\Kxb\Gallery\Domain\Title;
 
 final class ArtController
 {
@@ -71,16 +73,22 @@ final class ArtController
             return new RedirectResponse('admin/art/create', ['form' => $form->createView()]);
         }
 
+        /** @var ArtForm $data */
         $data = $form->getData();
-        $id = (string) $this->artService->createArt(
-            $data->title(),
-            $data->details(),
-            $data->availability(),
-            $data->price(),
-            $data->artistId()
-        );
+        $attachments = $data->getAttachments();
 
-        return new RedirectResponse(sprintf('/admin/art/%s', $id));
+        /** @var UploadedFile $attachment */
+        foreach ($attachments as $attachment) {
+            $this->artService->createArt(
+                new Title($attachment->getClientOriginalName()),
+                $data->details(),
+                $data->availability(),
+                $data->price(),
+                $data->artistId()
+            );
+        }
+
+        return new RedirectResponse('/admin/art');
     }
 
     private function createArtForm(): FormInterface

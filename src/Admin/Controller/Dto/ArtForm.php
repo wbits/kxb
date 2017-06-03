@@ -24,6 +24,7 @@ final class ArtForm
     private $numberOfCopies;
     private $price;
     private $artistId;
+    private $attachments;
     private $artistChoices;
 
     /**
@@ -162,6 +163,18 @@ final class ArtForm
     public function setArtistId($artistId): ArtForm
     {
         $this->artistId = $artistId;
+
+        return $this;
+    }
+
+    public function getAttachments()
+    {
+        return $this->attachments;
+    }
+
+    public function setAttachments($attachments): ArtForm
+    {
+        $this->attachments = $attachments;
 
         return $this;
     }
