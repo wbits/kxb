@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Gallery\Infrastructure;
+namespace Wbits\Kxb\Gallery\Infrastructure;
 
 use Wbits\Kxb\Gallery\Domain\Artist;
 use Wbits\Kxb\Gallery\Domain\ArtistId;
