@@ -75,7 +75,7 @@ final class ArtServiceTest extends TestCase
         $this->createSomeArt();
         $newTitle = new Title('some new title');
 
-        $this->artService->updateTitle($this->id, $newTitle);
+        $this->artService->updateArtTitle($this->id, $newTitle);
         $updatedTopic = $this->artService->getArt($this->id);
 
         self::assertEquals($newTitle, $updatedTopic->getTitle());

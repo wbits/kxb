@@ -33,9 +33,12 @@ final class DoctrineArtRepository implements ArtRepository
         $this->dbal->upsert((string) $art->getId(), $data);
     }
 
-    public function get(ArtId $artId)
+    public function get(ArtId $artId): Art
     {
         $result = $this->dbal->fetchById((string) $artId);
+        if (!$result) {
+            throw new \InvalidArgumentException('Art was not found');
+        }
 
         return $this->serializer->deserialize($result['doc']);
     }

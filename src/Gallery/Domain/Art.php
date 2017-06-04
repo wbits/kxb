@@ -40,6 +40,11 @@ final class Art
         return new self($id, $title, $details, $availability, $price, $artistId);
     }
 
+    public function updateTitle(Title $title): void
+    {
+        $this->title = $title;
+    }
+
     public function getId(): ArtId
     {
         return $this->id;

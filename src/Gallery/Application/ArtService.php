@@ -46,7 +46,10 @@ final class ArtService
         return $this->repository->get($id);
     }
 
-    public function updateTitle(ArtId $id, Title $newTitle)
+    public function updateArtTitle(ArtId $id, Title $newTitle): void
     {
+        $art = $this->repository->get($id);
+        $art->updateTitle($newTitle);
+        $this->repository->save($art);
     }
 }
