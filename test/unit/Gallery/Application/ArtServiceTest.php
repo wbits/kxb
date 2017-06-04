@@ -27,9 +27,15 @@ final class ArtServiceTest extends TestCase
      */
     private $artService;
 
+    /**
+     * @var InMemoryArtRepository
+     */
+    private $repository;
+
     protected function setUp()
     {
-        $this->artService = new ArtService(new InMemoryArtRepository());
+        $this->repository = new InMemoryArtRepository();
+        $this->artService = new ArtService($this->repository);
     }
 
     public function testItDoesNotReturnAnyArtPiecesWhenNoneWereCreated()
@@ -61,6 +67,7 @@ final class ArtServiceTest extends TestCase
 
     private function createArtPiece()
     {
+        $id = $this->repository->getNextIdentifier();
         $title = new Title('title');
         $details = new ArtDetails(
             new Material('paint on canvas'),
@@ -71,6 +78,8 @@ final class ArtServiceTest extends TestCase
         $price = new Price(1200.50);
         $artistId = new ArtistId('1');
 
-        $this->artService->createArt($title, $details, $availability, $price, $artistId);
+        $art = Art::create($id, $title, $details, $availability, $price, $artistId);
+
+        $this->repository->save($art);
     }
 }
