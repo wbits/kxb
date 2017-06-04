@@ -32,6 +32,11 @@ final class ArtServiceTest extends TestCase
      */
     private $repository;
 
+    /**
+     * @var ArtId
+     */
+    private $id;
+
     protected function setUp()
     {
         $this->repository = new InMemoryArtRepository();
@@ -46,14 +51,14 @@ final class ArtServiceTest extends TestCase
 
     public function testItReturnsACollectionOfArtPieces()
     {
-        $this->createArtPiece();
+        $this->createSomeArt();
         $works = $this->artService->getAllArt();
         self::assertCount(1, $works);
     }
 
     public function testItCanFetchAnArtPieceById()
     {
-        $this->createArtPiece();
+        $this->createSomeArt();
         $id = new ArtId('1');
         $work = $this->artService->getArt($id);
         self::assertInstanceOf(Art::class, $work);
@@ -65,9 +70,20 @@ final class ArtServiceTest extends TestCase
         $this->artService->getArt(new ArtId(self::NON_EXISTING_ART_PIECE_ID));
     }
 
-    private function createArtPiece()
+    public function testItShouldUpdateTheTitle()
     {
-        $id = $this->repository->getNextIdentifier();
+        $this->createSomeArt();
+        $newTitle = new Title('some new title');
+
+        $this->artService->updateTitle($this->id, $newTitle);
+        $updatedTopic = $this->artService->getArt($this->id);
+
+        self::assertEquals($newTitle, $updatedTopic->getTitle());
+    }
+
+    private function createSomeArt()
+    {
+        $this->id = $this->repository->getNextIdentifier();
         $title = new Title('title');
         $details = new ArtDetails(
             new Material('paint on canvas'),
@@ -78,7 +94,7 @@ final class ArtServiceTest extends TestCase
         $price = new Price(1200.50);
         $artistId = new ArtistId('1');
 
-        $art = Art::create($id, $title, $details, $availability, $price, $artistId);
+        $art = Art::create($this->id, $title, $details, $availability, $price, $artistId);
 
         $this->repository->save($art);
     }

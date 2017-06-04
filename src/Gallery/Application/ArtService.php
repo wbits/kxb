@@ -45,4 +45,8 @@ final class ArtService
     {
         return $this->repository->get($id);
     }
+
+    public function updateTitle(ArtId $id, Title $newTitle)
+    {
+    }
 }
