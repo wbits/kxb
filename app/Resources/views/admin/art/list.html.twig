@@ -24,13 +24,13 @@
                 <th>Price</th>
             </tr>
             {% for art in list %}
-                <tr>
-                    <td><a href="/admin/art/{{ art.id }}">{{ art.title|e }}</a></td>
-                    <td>{{ art.material }}</td>
-                    <td>{{ art.size }}</td>
-                    <td>{{ art.year }}</td>
-                    <td>{{ art.availability }} pieces</td>
-                    <td>{{ art.price }}</td>
+                <tr id="{{ art.id }}">
+                    <td class="title"><a href="/admin/art/{{ art.id }}">{{ art.title|e }}</a></td>
+                    <td class="material">{{ art.material }}</td>
+                    <td class="size">{{ art.size }}</td>
+                    <td class="year">{{ art.year }}</td>
+                    <td class="availability">{{ art.availability }} pieces</td>
+                    <td class="price">{{ art.price }}</td>
                     <td>
                         <a href="/admin/art/delete/{{ art.id }}">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
